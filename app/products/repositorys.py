@@ -6,8 +6,9 @@ from app.products.models import Product
 class ProductRepository:
     def get(self) -> list[Product]:
         with db_connect() as connection:
-            cursor = connection.execute("SELECT * FROM products")
-            columns = [column[0] for column in cursor.description]
+            cursor = connection.execute("SELECT name, price, stock FROM products")
+            products = cursor.fetchall()
             return [
-                Product(**dict(zip(columns, product))) for product in cursor.fetchall()
+                Product(name=name, price=price, stock=stock)
+                for name, price, stock in products
             ]
