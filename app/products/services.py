@@ -9,8 +9,8 @@ class ProductRepositoryInterface(Protocol):
 
 
 class ProductService:
-    def __init__(self, repository: ProductRepositoryInterface = ProductRepository()):
-        self.repository = repository
+    def __init__(self) -> None:
+        self.repository: ProductRepositoryInterface = ProductRepository()
 
     def get(self) -> list[ProductOut]:
         return self.repository.get()
