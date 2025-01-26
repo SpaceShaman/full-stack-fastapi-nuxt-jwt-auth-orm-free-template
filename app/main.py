@@ -1,8 +1,7 @@
 from fastapi import FastAPI
+from products.api import router as products_router
 
 app = FastAPI()
 
 
-@app.get("/products")
-async def get_products():
-    return []
+app.include_router(products_router)
