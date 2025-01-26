@@ -9,6 +9,6 @@ from sqlift import down, up
 def connection():
     os.environ["DB_URL"] = "sqlite:///file::memory:?cache=shared"
     with db_connect() as connection:
-        up()
+        up(migrations_path="app/migrations")
         yield connection
-        down()
+        down(migrations_path="app/migrations")
