@@ -25,6 +25,6 @@ def test_get_products_list(connection):
 
     assert response.status_code == 200
     assert response.json() == [
-        {"name": "Product 1", "price": 10.0, "stock": 15},
-        {"name": "Product 2", "price": 20.0, "stock": 25},
+        {"id": 1, "name": "Product 1", "price": 10.0, "stock": 15},
+        {"id": 2, "name": "Product 2", "price": 20.0, "stock": 25},
     ]
