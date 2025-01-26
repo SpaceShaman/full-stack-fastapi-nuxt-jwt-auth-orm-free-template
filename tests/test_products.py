@@ -11,7 +11,7 @@ def _create_product(connection, name: str, price: int, stock: int):
     connection.commit()
 
 
-def test_get_empty_products_list():
+def test_get_empty_products_list(connection):
     response = client.get("/products")
     assert response.status_code == 200
     assert response.json() == []

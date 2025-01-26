@@ -1,6 +1,6 @@
 from database import db_connect
 
-from app.products.models import ProductOut
+from products.models import ProductOut
 
 
 class ProductRepository:
