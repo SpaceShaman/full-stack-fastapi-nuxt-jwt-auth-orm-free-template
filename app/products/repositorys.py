@@ -1,4 +1,4 @@
-from database import db_connect
+from database.connection import db_connect
 
 from products.models import ProductOut
 

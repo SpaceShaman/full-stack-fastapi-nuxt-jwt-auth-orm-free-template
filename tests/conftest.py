@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
 
 @pytest.fixture
 def db_connection() -> Generator[Connection, Any, None]:
-    from database import db_connect
+    from database.connection import db_connect
     from sqlift import down, up
 
     os.environ["DB_URL"] = "sqlite:///file::memory:?cache=shared"
