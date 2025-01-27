@@ -5,15 +5,15 @@ def _create_product(connection, name: str, price: int, stock: int):
     connection.commit()
 
 
-def test_get_empty_products_list(client, connection):
+def test_get_empty_products_list(client, db_connection):
     response = client.get("/products")
     assert response.status_code == 200
     assert response.json() == []
 
 
-def test_get_products_list(client, connection):
-    _create_product(connection, "Product 1", 10, 15)
-    _create_product(connection, "Product 2", 20, 25)
+def test_get_products_list(client, db_connection):
+    _create_product(db_connection, "Product 1", 10, 15)
+    _create_product(db_connection, "Product 2", 20, 25)
 
     response = client.get("/products")
 

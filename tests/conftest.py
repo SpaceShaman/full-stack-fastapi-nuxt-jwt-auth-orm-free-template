@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 
 
 @pytest.fixture
-def connection() -> Generator[Connection, Any, None]:
+def db_connection() -> Generator[Connection, Any, None]:
     from database import db_connect
     from sqlift import down, up
 
