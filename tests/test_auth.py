@@ -1,3 +1,6 @@
+import pytest
+
+
 def _create_user(connection, username: str, hashed_password: str):
     connection.execute(
         f"INSERT INTO users (username, password) VALUES ('{username}', '{hashed_password}')"
@@ -5,13 +8,16 @@ def _create_user(connection, username: str, hashed_password: str):
     connection.commit()
 
 
-def test_login_and_get_jwt(client, db_connection):
+@pytest.fixture(autouse=True)
+def setup_db(db_connection):
     _create_user(
         db_connection,
         "user",
         "$2b$12$AIflVbmr.Re2WQ1EhvB2Yu2WRPFklJAjMfQ8LGPiCYDUrcXtxslqe",
     )
 
+
+def test_login_and_get_jwt(client, db_connection):
     response = client.post(
         "/auth/login", data={"username": "user", "password": "password"}
     )
@@ -24,14 +30,17 @@ def test_login_and_get_jwt(client, db_connection):
 
 
 def test_login_with_wrong_password(client, db_connection):
-    _create_user(
-        db_connection,
-        "user",
-        "$2b$12$AIflVbmr.Re2WQ1EhvB2Yu2WRPFklJAjMfQ8LGPiCYDUrcXtxslqe",
-    )
-
     response = client.post(
         "/auth/login", data={"username": "user", "password": "wrong-password"}
+    )
+
+    assert response.status_code == 400
+    assert response.json() == {"detail": "Incorrect username or password"}
+
+
+def test_login_with_wrong_username(client, db_connection):
+    response = client.post(
+        "/auth/login", data={"username": "wrong-username", "password": "password"}
     )
 
     assert response.status_code == 400
