@@ -1,3 +1,4 @@
+import jwt
 import pytest
 
 URL = "/auth/login"
@@ -27,6 +28,8 @@ def test_login_and_get_jwt(client, db_connection):
     assert "access_token" in response
     assert "token_type" in response
     assert response["token_type"] == "bearer"
+    decoded = jwt.decode(response["access_token"], "test", algorithms=["HS256"])
+    assert decoded == {"sub": "user"}
 
 
 def test_login_with_wrong_password(client, db_connection):

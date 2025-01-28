@@ -6,12 +6,17 @@ import pytest
 from fastapi.testclient import TestClient
 
 
+@pytest.fixture(autouse=True)
+def setup_env():
+    os.environ["DB_URL"] = "sqlite:///file::memory:?cache=shared"
+    os.environ["SECRET_KEY"] = "test"
+
+
 @pytest.fixture
 def db_connection() -> Generator[Connection, Any, None]:
     from database.connection import db_connect
     from sqlift import down, up
 
-    os.environ["DB_URL"] = "sqlite:///file::memory:?cache=shared"
     with db_connect() as connection:
         up(migrations_path="app/migrations")
         yield connection
