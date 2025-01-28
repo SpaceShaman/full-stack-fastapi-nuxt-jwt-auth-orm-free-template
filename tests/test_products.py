@@ -1,3 +1,6 @@
+URL = "/products"
+
+
 def _create_product(connection, name: str, price: int, stock: int):
     connection.execute(
         f"INSERT INTO products (name, price, stock) VALUES ('{name}', {price}, {stock})"
@@ -6,7 +9,7 @@ def _create_product(connection, name: str, price: int, stock: int):
 
 
 def test_get_empty_products_list(client, db_connection):
-    response = client.get("/products")
+    response = client.get(URL)
     assert response.status_code == 200
     assert response.json() == []
 
@@ -15,7 +18,7 @@ def test_get_products_list(client, db_connection):
     _create_product(db_connection, "Product 1", 10, 15)
     _create_product(db_connection, "Product 2", 20, 25)
 
-    response = client.get("/products")
+    response = client.get(URL)
 
     assert response.status_code == 200
     assert response.json() == [
