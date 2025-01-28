@@ -1,4 +1,5 @@
 import os
+from datetime import datetime, timedelta, timezone
 from typing import Protocol
 
 import jwt
@@ -34,4 +35,11 @@ class AuthService:
         return self.pwd_context.verify(plain_password, hashed_password)
 
     def _create_access_token(self, username: str) -> str:
-        return jwt.encode({"sub": username}, os.getenv("SECRET_KEY"), algorithm="HS256")
+        return jwt.encode(
+            {"sub": username, "exp": self._get_expire()},
+            os.getenv("SECRET_KEY"),
+            algorithm="HS256",
+        )
+
+    def _get_expire(self) -> datetime:
+        return datetime.now(timezone.utc) + timedelta(days=7)

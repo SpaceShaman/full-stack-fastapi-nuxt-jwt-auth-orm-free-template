@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta, timezone
+
 import jwt
 import pytest
 
@@ -29,7 +31,9 @@ def test_login_and_get_jwt(client, db_connection):
     assert "token_type" in response
     assert response["token_type"] == "bearer"
     decoded = jwt.decode(response["access_token"], "test", algorithms=["HS256"])
-    assert decoded == {"sub": "user"}
+    assert decoded["sub"] == "user"
+    predicted_exp = int((datetime.now(timezone.utc) + timedelta(days=7)).timestamp())
+    assert decoded["exp"] == predicted_exp
 
 
 def test_login_with_wrong_password(client, db_connection):
