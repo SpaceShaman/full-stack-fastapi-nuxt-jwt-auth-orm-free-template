@@ -1,7 +1,15 @@
+from contextlib import asynccontextmanager
+
 from auth.api import auth_router
-from database.migration import migrate
 from fastapi import FastAPI
 from products.api import products_router
+from sqlift import up
+
+
+@asynccontextmanager
+async def migrate(app):
+    yield up()
+
 
 app = FastAPI(lifespan=migrate)
 
