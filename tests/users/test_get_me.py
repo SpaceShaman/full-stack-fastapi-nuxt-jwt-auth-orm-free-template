@@ -41,3 +41,11 @@ def test_get_me_expired_token(client):
     response = client.get(URL, headers={"Authorization": f"Bearer {jwt_token}"})
 
     assert response.status_code == 401
+
+
+def test_get_me_user_not_found(client):
+    jwt_token = jwt.encode({"sub": "not_found"}, "test", algorithm="HS256")
+
+    response = client.get(URL, headers={"Authorization": f"Bearer {jwt_token}"})
+
+    assert response.status_code == 401
