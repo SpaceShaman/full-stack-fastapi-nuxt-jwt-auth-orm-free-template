@@ -1,19 +1,13 @@
-import jwt
-from fastapi import APIRouter, Depends, HTTPException
-from fastapi.security import OAuth2PasswordBearer
+from typing import Annotated
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+from fastapi import APIRouter, Depends
 
+from .dependencies import get_current_user
+from .models import User
 
 users_router = APIRouter(prefix="/users", tags=["users"])
 
 
 @users_router.get("/me")
-async def get_me(token: str = Depends(oauth2_scheme)) -> dict:
-    try:
-        payload = jwt.decode(token, "test", algorithms=["HS256"])
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=401, detail="Token has expired")
-    except jwt.InvalidTokenError:
-        raise HTTPException(status_code=401, detail="Invalid token")
-    return {"username": payload["sub"]}
+async def get_me(user: Annotated[User, Depends(get_current_user)]) -> User:
+    return user

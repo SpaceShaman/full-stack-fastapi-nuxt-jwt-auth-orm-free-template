@@ -1,6 +1,6 @@
 from database.connection import db_connect
 
-from .models import UserWithPassword
+from .models import User, UserWithPassword
 
 
 class UserRepository:
@@ -13,3 +13,11 @@ class UserRepository:
             return (
                 UserWithPassword(username=user[0], password=user[1]) if user else None
             )
+
+    def get_user(self, username: str) -> User | None:
+        with db_connect() as connection:
+            cursor = connection.execute(
+                "SELECT username FROM users WHERE username = ?", (username,)
+            )
+            user = cursor.fetchone()
+            return User(username=user[0]) if user else None
