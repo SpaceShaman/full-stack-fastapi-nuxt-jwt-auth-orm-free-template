@@ -27,3 +27,17 @@ def test_get_me(client, db_connection):
     assert response.status_code == 200
     response = response.json()
     assert response["username"] == "user"
+
+
+def test_get_me_invalid_token(client):
+    response = client.get(URL, headers={"Authorization": "Bearer invalid_token"})
+
+    assert response.status_code == 401
+
+
+def test_get_me_expired_token(client):
+    jwt_token = jwt.encode({"sub": "user", "exp": 0}, "test", algorithm="HS256")
+
+    response = client.get(URL, headers={"Authorization": f"Bearer {jwt_token}"})
+
+    assert response.status_code == 401
