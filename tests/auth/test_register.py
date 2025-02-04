@@ -52,7 +52,7 @@ def test_try_register_existing_user(client, db_connection):
         "/auth/register", data={"username": "new-user", "password": "password"}
     )
 
-    assert response.status_code == 400
+    assert response.status_code == 403
 
 
 def test_activate_registered_user(client, db_connection):

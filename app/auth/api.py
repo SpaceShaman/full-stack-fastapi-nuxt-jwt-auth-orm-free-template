@@ -29,7 +29,7 @@ async def register(
     try:
         RegisterService().register(form_data.username, form_data.password)
     except UserAlreadyExists as e:
-        raise HTTPException(status_code=400, detail="User already exists") from e
+        raise HTTPException(status_code=403, detail="User already exists") from e
     return {"register": "success"}
 
 
