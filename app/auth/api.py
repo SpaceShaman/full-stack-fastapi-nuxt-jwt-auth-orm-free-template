@@ -28,4 +28,4 @@ async def register(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -
 @auth_router.get("/activate/{activation_code}")
 async def activate(activation_code: str) -> dict[str, str]:
     RegisterService().activate(activation_code)
-    return {"status": "ok"}
+    return {"activation": "success"}
