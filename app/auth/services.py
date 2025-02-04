@@ -1,6 +1,7 @@
 import os
 from datetime import datetime, timedelta, timezone
 from typing import Protocol
+from uuid import uuid4
 
 import jwt
 from passlib.context import CryptContext
@@ -16,7 +17,9 @@ class LoginRepositoryInterface(Protocol):
 
 
 class RegisterRepositoryInterface(Protocol):
-    def create_user(self, username: str, password: str) -> None: ...
+    def create_user(
+        self, username: str, password: str, activation_code: str
+    ) -> None: ...
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -42,11 +45,16 @@ class RegisterService:
 
     def register(self, username: str, password: str) -> Token:
         hashed_password = self._generate_password_hash(password)
-        self.user_repository.create_user(username, hashed_password)
+        self.user_repository.create_user(
+            username, hashed_password, self._generate_activation_code()
+        )
         return Token(access_token=_create_access_token(username), token_type="bearer")
 
     def _generate_password_hash(self, password: str) -> str:
         return pwd_context.hash(password)
+
+    def _generate_activation_code(self) -> str:
+        return str(uuid4())
 
 
 def _create_access_token(username: str) -> str:

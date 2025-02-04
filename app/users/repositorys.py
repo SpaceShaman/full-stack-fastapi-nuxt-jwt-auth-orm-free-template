@@ -22,10 +22,10 @@ class UserRepository:
             user = cursor.fetchone()
             return User(username=user[0], is_active=user[1]) if user else None
 
-    def create_user(self, username: str, password: str) -> None:
+    def create_user(self, username: str, password: str, activation_code: str) -> None:
         with db_connect() as connection:
             connection.execute(
-                "INSERT INTO users (username, password) VALUES (?, ?)",
-                (username, password),
+                "INSERT INTO users (username, password, activation_code) VALUES (?, ?, ?)",
+                (username, password, activation_code),
             )
             connection.commit()
