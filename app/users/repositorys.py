@@ -29,3 +29,11 @@ class UserRepository:
                 (username, password, activation_code),
             )
             connection.commit()
+
+    def activate_user(self, activation_code: str) -> None:
+        with db_connect() as connection:
+            connection.execute(
+                "UPDATE users SET is_active = 1 WHERE activation_code = ?",
+                (activation_code,),
+            )
+            connection.commit()

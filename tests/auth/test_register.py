@@ -2,7 +2,18 @@ from uuid import UUID
 
 from passlib.context import CryptContext
 
-URL = "/auth/register"
+
+def _create_user(
+    connection,
+    username: str,
+    hashed_password: str,
+    is_active: bool,
+    activation_code: str,
+):
+    connection.execute(
+        f"INSERT INTO users (username, password, is_active, activation_code) VALUES ('{username}', '{hashed_password}', {is_active}, '{activation_code}')"
+    )
+    connection.commit()
 
 
 def assert_user(connection, username: str, password: str, is_active: bool):
@@ -16,8 +27,10 @@ def assert_user(connection, username: str, password: str, is_active: bool):
     assert UUID(user[3])
 
 
-def test_register(client, db_connection):
-    response = client.post(URL, data={"username": "new-user", "password": "password"})
+def test_register_new_user(client, db_connection):
+    response = client.post(
+        "/auth/register", data={"username": "new-user", "password": "password"}
+    )
 
     assert response.status_code == 200
     response = response.json()
@@ -30,4 +43,24 @@ def test_register(client, db_connection):
         "new-user",
         "password",
         False,
+    )
+
+
+def test_activate_registered_user(client, db_connection):
+    _create_user(
+        db_connection,
+        "new-user",
+        "$2b$12$AIflVbmr.Re2WQ1EhvB2Yu2WRPFklJAjMfQ8LGPiCYDUrcXtxslqe",
+        False,
+        "94121a26-91c5-4303-b456-654818926474",
+    )
+
+    response = client.get("/auth/activate/94121a26-91c5-4303-b456-654818926474")
+
+    assert response.status_code == 200
+    assert_user(
+        db_connection,
+        "new-user",
+        "password",
+        True,
     )

@@ -9,3 +9,9 @@ class User(BaseModel):
 class UserWithPassword(BaseModel):
     username: str
     password: str
+
+
+class UserWithActivationCode(BaseModel):
+    username: str
+    activation_code: str
+    is_active: bool

@@ -20,6 +20,7 @@ class RegisterRepositoryInterface(Protocol):
     def create_user(
         self, username: str, password: str, activation_code: str
     ) -> None: ...
+    def activate_user(self, activation_code: str) -> None: ...
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -49,6 +50,9 @@ class RegisterService:
             username, hashed_password, self._generate_activation_code()
         )
         return Token(access_token=_create_access_token(username), token_type="bearer")
+
+    def activate(self, activation_code: str) -> None:
+        self.user_repository.activate_user(activation_code)
 
     def _generate_password_hash(self, password: str) -> str:
         return pwd_context.hash(password)
