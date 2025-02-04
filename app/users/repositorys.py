@@ -17,7 +17,15 @@ class UserRepository:
     def get_user(self, username: str) -> User | None:
         with db_connect() as connection:
             cursor = connection.execute(
-                "SELECT username FROM users WHERE username = ?", (username,)
+                "SELECT username, is_active FROM users WHERE username = ?", (username,)
             )
             user = cursor.fetchone()
-            return User(username=user[0]) if user else None
+            return User(username=user[0], is_active=user[1]) if user else None
+
+    def create_user(self, username: str, password: str) -> None:
+        with db_connect() as connection:
+            connection.execute(
+                "INSERT INTO users (username, password) VALUES (?, ?)",
+                (username, password),
+            )
+            connection.commit()

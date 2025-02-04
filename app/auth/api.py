@@ -18,3 +18,8 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> T
         raise HTTPException(
             status_code=400, detail="Incorrect username or password"
         ) from e
+
+
+@auth_router.post("/register")
+async def register(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> Token:
+    return AuthService().register(form_data.username, form_data.password)

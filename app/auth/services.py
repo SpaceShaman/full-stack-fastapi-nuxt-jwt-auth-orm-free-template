@@ -13,6 +13,7 @@ from .models import Token
 
 class UserRepositoryInterface(Protocol):
     def get_user_with_password(self, username: str) -> UserWithPassword | None: ...
+    def create_user(self, username: str, password: str) -> None: ...
 
 
 class AuthService:
@@ -24,6 +25,13 @@ class AuthService:
         user = self.user_repository.get_user_with_password(username)
         if not user or not self._verify_password(password, user.password):
             raise IncorrectUsernameOrPassword("Incorrect username or password")
+        return Token(
+            access_token=self._create_access_token(username), token_type="bearer"
+        )
+
+    def register(self, username: str, password: str) -> Token:
+        hashed_password = self._generate_password_hash(password)
+        self.user_repository.create_user(username, hashed_password)
         return Token(
             access_token=self._create_access_token(username), token_type="bearer"
         )
