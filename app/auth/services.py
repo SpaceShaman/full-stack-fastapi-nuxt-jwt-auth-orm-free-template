@@ -8,7 +8,7 @@ from passlib.context import CryptContext
 from users.models import UserWithPassword
 from users.repositorys import UserRepository
 
-from .exceptions import IncorrectUsernameOrPassword
+from .exceptions import IncorrectUsernameOrPassword, UserAlreadyExists
 from .models import Token
 
 
@@ -46,9 +46,12 @@ class RegisterService:
 
     def register(self, username: str, password: str) -> Token:
         hashed_password = self._generate_password_hash(password)
-        self.user_repository.create_user(
-            username, hashed_password, self._generate_activation_code()
-        )
+        try:
+            self.user_repository.create_user(
+                username, hashed_password, self._generate_activation_code()
+            )
+        except Exception as e:
+            raise UserAlreadyExists("User already exists") from e
         return Token(access_token=_create_access_token(username), token_type="bearer")
 
     def activate(self, activation_code: str) -> None:
