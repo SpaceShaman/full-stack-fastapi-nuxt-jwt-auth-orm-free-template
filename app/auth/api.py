@@ -21,11 +21,14 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> T
 
 
 @auth_router.post("/register")
-async def register(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> Token:
+async def register(
+    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+) -> dict[str, str]:
     try:
-        return RegisterService().register(form_data.username, form_data.password)
+        RegisterService().register(form_data.username, form_data.password)
     except UserAlreadyExists as e:
         raise HTTPException(status_code=400, detail="User already exists") from e
+    return {"register": "success"}
 
 
 @auth_router.get("/activate/{activation_code}")

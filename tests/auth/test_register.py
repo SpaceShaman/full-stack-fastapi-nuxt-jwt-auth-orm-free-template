@@ -33,11 +33,6 @@ def test_register_new_user(client, db_connection):
     )
 
     assert response.status_code == 200
-    response = response.json()
-    assert "access_token" in response
-    assert "token_type" in response
-    assert response["token_type"] == "bearer"
-
     assert_user(
         db_connection,
         "new-user",
