@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 
-from .exceptions import IncorrectUsernameOrPassword, UserAlreadyExists
+from .exceptions import IncorrectUsernameOrPassword, UserAlreadyExists, UserIsNotActive
 from .models import Token
 from .services import LoginService, RegisterService
 
@@ -16,8 +16,10 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> T
         return LoginService().login(form_data.username, form_data.password)
     except IncorrectUsernameOrPassword as e:
         raise HTTPException(
-            status_code=400, detail="Incorrect username or password"
+            status_code=401, detail="Incorrect username or password"
         ) from e
+    except UserIsNotActive as e:
+        raise HTTPException(status_code=401, detail="User is not active") from e
 
 
 @auth_router.post("/register")

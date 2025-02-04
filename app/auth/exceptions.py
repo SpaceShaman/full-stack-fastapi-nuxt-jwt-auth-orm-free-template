@@ -4,3 +4,7 @@ class IncorrectUsernameOrPassword(Exception):
 
 class UserAlreadyExists(Exception):
     pass
+
+
+class UserIsNotActive(Exception):
+    pass

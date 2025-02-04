@@ -6,9 +6,11 @@ import pytest
 URL = "/auth/login"
 
 
-def _create_user(connection, username: str, hashed_password: str):
+def _create_user(
+    connection, username: str, hashed_password: str, is_active: bool = True
+):
     connection.execute(
-        f"INSERT INTO users (username, password) VALUES ('{username}', '{hashed_password}')"
+        f"INSERT INTO users (username, password, is_active) VALUES ('{username}', '{hashed_password}', {is_active})"
     )
     connection.commit()
 
@@ -39,7 +41,7 @@ def test_login_and_get_jwt(client, db_connection):
 def test_login_with_wrong_password(client, db_connection):
     response = client.post(URL, data={"username": "user", "password": "wrong-password"})
 
-    assert response.status_code == 400
+    assert response.status_code == 401
     assert response.json() == {"detail": "Incorrect username or password"}
 
 
@@ -48,5 +50,21 @@ def test_login_with_wrong_username(client, db_connection):
         URL, data={"username": "wrong-username", "password": "password"}
     )
 
-    assert response.status_code == 400
+    assert response.status_code == 401
     assert response.json() == {"detail": "Incorrect username or password"}
+
+
+def test_login_with_not_active_user(client, db_connection):
+    _create_user(
+        db_connection,
+        "not-active-user",
+        "$2b$12$AIflVbmr.Re2WQ1EhvB2Yu2WRPFklJAjMfQ8LGPiCYDUrcXtxslqe",
+        False,
+    )
+
+    response = client.post(
+        URL, data={"username": "not-active-user", "password": "password"}
+    )
+
+    assert response.status_code == 401
+    assert response.json() == {"detail": "User is not active"}

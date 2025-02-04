@@ -6,12 +6,9 @@ class User(BaseModel):
     is_active: bool
 
 
-class UserWithPassword(BaseModel):
-    username: str
+class UserWithPassword(User):
     password: str
 
 
-class UserWithActivationCode(BaseModel):
-    username: str
+class UserWithActivationCode(User):
     activation_code: str
-    is_active: bool

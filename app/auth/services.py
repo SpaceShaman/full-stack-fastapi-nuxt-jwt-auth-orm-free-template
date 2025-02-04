@@ -8,7 +8,7 @@ from passlib.context import CryptContext
 from users.models import UserWithPassword
 from users.repositorys import UserRepository
 
-from .exceptions import IncorrectUsernameOrPassword, UserAlreadyExists
+from .exceptions import IncorrectUsernameOrPassword, UserAlreadyExists, UserIsNotActive
 from .models import Token
 
 
@@ -34,6 +34,8 @@ class LoginService:
         user = self.user_repository.get_user_with_password(username)
         if not user or not self._verify_password(password, user.password):
             raise IncorrectUsernameOrPassword("Incorrect username or password")
+        if not user.is_active:
+            raise UserIsNotActive("User is not active")
         return Token(
             access_token=self._create_access_token(username), token_type="bearer"
         )
