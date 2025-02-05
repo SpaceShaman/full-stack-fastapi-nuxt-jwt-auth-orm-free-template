@@ -90,6 +90,6 @@ class RegisterService:
             return False
         if not any(char.isupper() for char in password):
             return False
-        if not any(char.islower() for char in password):
+        if all((char.isalnum() for char in password)):
             return False
-        return True
+        return any((char.islower() for char in password))

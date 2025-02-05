@@ -63,6 +63,38 @@ def test_try_register_user_with_weak_password(client, db_connection):
     assert response.status_code == 401
 
 
+def test_try_register_user_with_short_password(client, db_connection):
+    response = client.post(
+        "/auth/register", data={"username": "new-user", "password": "Pass0D$"}
+    )
+
+    assert response.status_code == 401
+
+
+def test_try_register_user_with_no_number_in_password(client, db_connection):
+    response = client.post(
+        "/auth/register", data={"username": "new-user", "password": "Password$"}
+    )
+
+    assert response.status_code == 401
+
+
+def test_try_register_user_with_no_uppercase_in_password(client, db_connection):
+    response = client.post(
+        "/auth/register", data={"username": "new-user", "password": "passw0rd$"}
+    )
+
+    assert response.status_code == 401
+
+
+def test_try_register_user_with_no_special_char_in_password(client, db_connection):
+    response = client.post(
+        "/auth/register", data={"username": "new-user", "password": "Passw0rd"}
+    )
+
+    assert response.status_code == 401
+
+
 def test_activate_registered_user(client, db_connection):
     _create_user(
         db_connection,
