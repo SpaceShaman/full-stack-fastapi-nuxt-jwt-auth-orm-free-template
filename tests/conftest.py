@@ -28,3 +28,19 @@ def client() -> TestClient:
     from main import app
 
     return TestClient(app)
+
+
+@pytest.fixture
+def mail_spy(mocker) -> Any:
+    class MailServiceSpy:
+        def __init__(self):
+            self.activation_code = None
+            self.email = None
+
+        def send_activation_code(self, email: str, activation_code: str) -> None:
+            self.email = email
+            self.activation_code = activation_code
+
+    mail = MailServiceSpy()
+    mocker.patch("auth.services.MailService", return_value=mail)
+    yield mail

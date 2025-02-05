@@ -28,7 +28,7 @@ def assert_user(connection, username: str, password: str, is_active: bool, email
     assert UUID(user[4])
 
 
-def test_register_new_user(client, db_connection):
+def test_register_new_user(client, db_connection, mail_spy):
     response = client.post(
         "/auth/register",
         json={
@@ -46,6 +46,8 @@ def test_register_new_user(client, db_connection):
         False,
         "test@test.com",
     )
+    assert mail_spy.email == "test@test.com"
+    assert UUID(mail_spy.activation_code)
 
 
 def test_try_register_existing_user(client, db_connection):
