@@ -1,6 +1,6 @@
 from database.connection import db_connect
 
-from .models import User, UserWithPassword
+from .schemas import User, UserWithPassword
 
 
 class UserRepository:

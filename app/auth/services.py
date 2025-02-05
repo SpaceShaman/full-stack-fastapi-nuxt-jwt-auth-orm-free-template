@@ -5,8 +5,8 @@ from uuid import uuid4
 
 import jwt
 from passlib.context import CryptContext
-from users.models import UserWithPassword
 from users.repositorys import UserRepository
+from users.schemas import UserWithPassword
 
 from .exceptions import (
     IncorrectUsernameOrPassword,
@@ -14,7 +14,7 @@ from .exceptions import (
     UserAlreadyExists,
     UserIsNotActive,
 )
-from .models import Token
+from .schemas import Token
 
 
 class LoginRepositoryInterface(Protocol):

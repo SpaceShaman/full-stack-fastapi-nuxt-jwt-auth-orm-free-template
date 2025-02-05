@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 
 from .dependencies import get_current_user
-from .models import User
+from .schemas import User
 
 users_router = APIRouter(prefix="/users", tags=["users"])
 

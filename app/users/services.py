@@ -1,8 +1,8 @@
 from typing import Protocol
 
 from .exceptions import UserNotFound
-from .models import User
 from .repositorys import UserRepository
+from .schemas import User
 
 
 class UserRepositoryInterface(Protocol):

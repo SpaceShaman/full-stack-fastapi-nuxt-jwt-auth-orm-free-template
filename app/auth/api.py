@@ -9,7 +9,7 @@ from .exceptions import (
     UserAlreadyExists,
     UserIsNotActive,
 )
-from .models import Token, UserRegistration
+from .schemas import Token, UserRegistration
 from .services import LoginService, RegisterService
 
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
