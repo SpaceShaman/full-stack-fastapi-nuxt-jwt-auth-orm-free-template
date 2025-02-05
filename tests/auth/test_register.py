@@ -28,7 +28,7 @@ def assert_user(connection, username: str, password: str, is_active: bool, email
     assert UUID(user[4])
 
 
-def assert_mail_spy(mail_spy, recipient: str):
+def assert_mail(mail_spy, recipient: str):
     activation_code = mail_spy.body.split(": ")[1]
     assert mail_spy.recipient == recipient
     assert mail_spy.title == "Activate your account"
@@ -53,7 +53,7 @@ def test_register_new_user(client, db_connection, mail_spy):
         False,
         "test@test.com",
     )
-    assert_mail_spy(mail_spy, "test@test.com")
+    assert_mail(mail_spy, "test@test.com")
 
 
 def test_try_register_existing_user(client, db_connection):
