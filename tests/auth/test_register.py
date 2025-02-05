@@ -11,25 +11,31 @@ def _create_user(
     activation_code: str = "94121a26-91c5-4303-b456-654818926474",
 ):
     connection.execute(
-        f"INSERT INTO users (username, password, is_active, activation_code) VALUES ('{username}', '{hashed_password}', {is_active}, '{activation_code}')"
+        f"INSERT INTO users (username, password, is_active, activation_code, email) VALUES ('{username}', '{hashed_password}', {is_active}, '{activation_code}', 'test@test.com')"
     )
     connection.commit()
 
 
-def assert_user(connection, username: str, password: str, is_active: bool):
+def assert_user(connection, username: str, password: str, is_active: bool, email: str):
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
     user = connection.execute(
-        f"SELECT username, password, is_active, activation_code FROM users WHERE username = '{username}'"
+        f"SELECT username, password, is_active, email, activation_code FROM users WHERE username = '{username}'"
     ).fetchone()
     assert user[0] == username
     assert pwd_context.verify(password, user[1])
     assert user[2] == is_active
-    assert UUID(user[3])
+    assert user[3] == email
+    assert UUID(user[4])
 
 
 def test_register_new_user(client, db_connection):
     response = client.post(
-        "/auth/register", data={"username": "new-user", "password": "Passw0rd$"}
+        "/auth/register",
+        json={
+            "username": "new-user",
+            "password": "Passw0rd$",
+            "email": "test@test.com",
+        },
     )
 
     assert response.status_code == 200
@@ -38,6 +44,7 @@ def test_register_new_user(client, db_connection):
         "new-user",
         "Passw0rd$",
         False,
+        "test@test.com",
     )
 
 
@@ -49,7 +56,12 @@ def test_try_register_existing_user(client, db_connection):
     )
 
     response = client.post(
-        "/auth/register", data={"username": "new-user", "password": "Passw0rd$"}
+        "/auth/register",
+        json={
+            "username": "new-user",
+            "password": "Passw0rd$",
+            "email": "test@test.com",
+        },
     )
 
     assert response.status_code == 403
@@ -57,7 +69,8 @@ def test_try_register_existing_user(client, db_connection):
 
 def test_try_register_user_with_weak_password(client, db_connection):
     response = client.post(
-        "/auth/register", data={"username": "new-user", "password": "password"}
+        "/auth/register",
+        json={"username": "new-user", "password": "password", "email": "test@test.com"},
     )
 
     assert response.status_code == 401
@@ -65,7 +78,8 @@ def test_try_register_user_with_weak_password(client, db_connection):
 
 def test_try_register_user_with_short_password(client, db_connection):
     response = client.post(
-        "/auth/register", data={"username": "new-user", "password": "Pass0D$"}
+        "/auth/register",
+        json={"username": "new-user", "password": "Pass0D$", "email": "test@test.com"},
     )
 
     assert response.status_code == 401
@@ -73,7 +87,12 @@ def test_try_register_user_with_short_password(client, db_connection):
 
 def test_try_register_user_with_no_number_in_password(client, db_connection):
     response = client.post(
-        "/auth/register", data={"username": "new-user", "password": "Password$"}
+        "/auth/register",
+        json={
+            "username": "new-user",
+            "password": "Password$",
+            "email": "test@test.com",
+        },
     )
 
     assert response.status_code == 401
@@ -81,7 +100,12 @@ def test_try_register_user_with_no_number_in_password(client, db_connection):
 
 def test_try_register_user_with_no_uppercase_in_password(client, db_connection):
     response = client.post(
-        "/auth/register", data={"username": "new-user", "password": "passw0rd$"}
+        "/auth/register",
+        json={
+            "username": "new-user",
+            "password": "passw0rd$",
+            "email": "test@test.com",
+        },
     )
 
     assert response.status_code == 401
@@ -89,7 +113,8 @@ def test_try_register_user_with_no_uppercase_in_password(client, db_connection):
 
 def test_try_register_user_with_no_special_char_in_password(client, db_connection):
     response = client.post(
-        "/auth/register", data={"username": "new-user", "password": "Passw0rd"}
+        "/auth/register",
+        json={"username": "new-user", "password": "Passw0rd", "email": "test@test.com"},
     )
 
     assert response.status_code == 401
@@ -107,9 +132,4 @@ def test_activate_registered_user(client, db_connection):
     response = client.get("/auth/activate/94121a26-91c5-4303-b456-654818926474")
 
     assert response.status_code == 200
-    assert_user(
-        db_connection,
-        "new-user",
-        "password",
-        True,
-    )
+    assert_user(db_connection, "new-user", "password", True, "test@test.com")

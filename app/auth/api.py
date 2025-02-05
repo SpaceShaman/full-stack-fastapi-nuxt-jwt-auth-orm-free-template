@@ -9,7 +9,7 @@ from .exceptions import (
     UserAlreadyExists,
     UserIsNotActive,
 )
-from .models import Token
+from .models import Token, UserRegistration
 from .services import LoginService, RegisterService
 
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
@@ -28,11 +28,9 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> T
 
 
 @auth_router.post("/register")
-async def register(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-) -> dict[str, str]:
+async def register(user: UserRegistration) -> dict[str, str]:
     try:
-        RegisterService().register(form_data.username, form_data.password)
+        RegisterService().register(user.username, user.password, user.email)
     except UserAlreadyExists as e:
         raise HTTPException(status_code=403, detail="User already exists") from e
     except PasswordIsTooWeak as e:

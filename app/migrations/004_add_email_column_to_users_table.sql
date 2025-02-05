@@ -1,0 +1,6 @@
+--UP
+ALTER TABLE users
+ADD COLUMN email VARCHAR(255);
+--DOWN
+ALTER TABLE users
+DROP COLUMN email;

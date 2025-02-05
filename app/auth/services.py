@@ -23,7 +23,7 @@ class LoginRepositoryInterface(Protocol):
 
 class RegisterRepositoryInterface(Protocol):
     def create_user(
-        self, username: str, password: str, activation_code: str
+        self, username: str, password: str, email: str, activation_code: str
     ) -> None: ...
     def activate_user(self, activation_code: str) -> None: ...
 
@@ -63,13 +63,13 @@ class RegisterService:
     def __init__(self) -> None:
         self.user_repository: RegisterRepositoryInterface = UserRepository()
 
-    def register(self, username: str, password: str) -> None:
+    def register(self, username: str, password: str, email: str) -> None:
         if not self._check_password_strength(password):
             raise PasswordIsTooWeak("Password is too weak")
         hashed_password = self._generate_password_hash(password)
         try:
             self.user_repository.create_user(
-                username, hashed_password, self._generate_activation_code()
+                username, hashed_password, email, self._generate_activation_code()
             )
         except Exception as e:
             raise UserAlreadyExists("User already exists") from e
