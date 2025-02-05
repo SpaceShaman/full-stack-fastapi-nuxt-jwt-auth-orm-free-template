@@ -8,3 +8,7 @@ class UserAlreadyExists(Exception):
 
 class UserIsNotActive(Exception):
     pass
+
+
+class PasswordIsTooWeak(Exception):
+    pass

@@ -8,7 +8,12 @@ from passlib.context import CryptContext
 from users.models import UserWithPassword
 from users.repositorys import UserRepository
 
-from .exceptions import IncorrectUsernameOrPassword, UserAlreadyExists, UserIsNotActive
+from .exceptions import (
+    IncorrectUsernameOrPassword,
+    PasswordIsTooWeak,
+    UserAlreadyExists,
+    UserIsNotActive,
+)
 from .models import Token
 
 
@@ -59,6 +64,8 @@ class RegisterService:
         self.user_repository: RegisterRepositoryInterface = UserRepository()
 
     def register(self, username: str, password: str) -> None:
+        if not self._check_password_strength(password):
+            raise PasswordIsTooWeak("Password is too weak")
         hashed_password = self._generate_password_hash(password)
         try:
             self.user_repository.create_user(
@@ -75,3 +82,14 @@ class RegisterService:
 
     def _generate_activation_code(self) -> str:
         return str(uuid4())
+
+    def _check_password_strength(self, password: str) -> bool:
+        if len(password) < 8:
+            return False
+        if not any(char.isdigit() for char in password):
+            return False
+        if not any(char.isupper() for char in password):
+            return False
+        if not any(char.islower() for char in password):
+            return False
+        return True

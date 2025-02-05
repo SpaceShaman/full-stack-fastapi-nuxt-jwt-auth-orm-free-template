@@ -3,7 +3,12 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 
-from .exceptions import IncorrectUsernameOrPassword, UserAlreadyExists, UserIsNotActive
+from .exceptions import (
+    IncorrectUsernameOrPassword,
+    PasswordIsTooWeak,
+    UserAlreadyExists,
+    UserIsNotActive,
+)
 from .models import Token
 from .services import LoginService, RegisterService
 
@@ -30,6 +35,8 @@ async def register(
         RegisterService().register(form_data.username, form_data.password)
     except UserAlreadyExists as e:
         raise HTTPException(status_code=403, detail="User already exists") from e
+    except PasswordIsTooWeak as e:
+        raise HTTPException(status_code=401, detail="Password is too weak") from e
     return {"register": "success"}
 
 

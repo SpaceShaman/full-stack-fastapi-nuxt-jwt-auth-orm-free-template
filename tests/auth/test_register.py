@@ -29,14 +29,14 @@ def assert_user(connection, username: str, password: str, is_active: bool):
 
 def test_register_new_user(client, db_connection):
     response = client.post(
-        "/auth/register", data={"username": "new-user", "password": "password"}
+        "/auth/register", data={"username": "new-user", "password": "Passw0rd$"}
     )
 
     assert response.status_code == 200
     assert_user(
         db_connection,
         "new-user",
-        "password",
+        "Passw0rd$",
         False,
     )
 
@@ -49,10 +49,18 @@ def test_try_register_existing_user(client, db_connection):
     )
 
     response = client.post(
-        "/auth/register", data={"username": "new-user", "password": "password"}
+        "/auth/register", data={"username": "new-user", "password": "Passw0rd$"}
     )
 
     assert response.status_code == 403
+
+
+def test_try_register_user_with_weak_password(client, db_connection):
+    response = client.post(
+        "/auth/register", data={"username": "new-user", "password": "password"}
+    )
+
+    assert response.status_code == 401
 
 
 def test_activate_registered_user(client, db_connection):
