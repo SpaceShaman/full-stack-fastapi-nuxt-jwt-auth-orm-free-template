@@ -10,7 +10,7 @@ from .exceptions import SMTPEnvError
 class MailClient:
     def send_mail(self, recipients: list[str], subject: str, body: str) -> None:
         message = self._generate_message(recipients, subject, body)
-        with _smtp_connection() as smtp:
+        with _create_smtp_connection() as smtp:
             smtp.sendmail(SMTP_USER, recipients, message)
 
     def _generate_message(self, recipients: list[str], subject: str, body: str) -> str:
@@ -22,7 +22,7 @@ class MailClient:
 
 
 @contextmanager
-def _smtp_connection():
+def _create_smtp_connection():
     if (
         SMTP_HOST is None
         or SMTP_PORT is None
