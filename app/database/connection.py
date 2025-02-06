@@ -1,7 +1,8 @@
-import os
 from contextlib import contextmanager
 from sqlite3 import Connection, connect
 from typing import Generator
+
+from core.settings import DB_URL
 
 
 @contextmanager
@@ -16,4 +17,4 @@ def db_connect() -> Generator[Connection, None, None]:
 
 
 def _get_database_path() -> str:
-    return os.environ.get("DB_URL", "sqlite:///db.sqlite").replace("sqlite:///", "")
+    return DB_URL.replace("sqlite:///", "")
