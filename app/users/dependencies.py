@@ -1,6 +1,5 @@
-import os
-
 import jwt
+from core.settings import SECRET_KEY
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 
@@ -20,7 +19,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
 
 def _decode_token(token: str) -> dict:
     try:
-        return jwt.decode(token, os.getenv("SECRET_KEY"), algorithms=["HS256"])
+        return jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
     except jwt.ExpiredSignatureError as e:
         raise HTTPException(status_code=401, detail="Token has expired") from e
     except jwt.InvalidTokenError as e:

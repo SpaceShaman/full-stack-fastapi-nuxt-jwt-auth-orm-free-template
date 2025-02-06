@@ -1,9 +1,9 @@
-import os
 from datetime import datetime, timedelta, timezone
 from typing import Protocol
 from uuid import uuid4
 
 import jwt
+from core.settings import SECRET_KEY
 from mail.services import MailService
 from passlib.context import CryptContext
 from users.repositorys import UserRepository
@@ -56,7 +56,7 @@ class LoginService:
     def _create_access_token(self, username: str) -> str:
         return jwt.encode(
             {"sub": username, "exp": self._get_expire()},
-            os.getenv("SECRET_KEY"),
+            SECRET_KEY,
             algorithm="HS256",
         )
 
