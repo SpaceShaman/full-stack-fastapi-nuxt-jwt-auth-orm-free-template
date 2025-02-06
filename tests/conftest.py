@@ -18,9 +18,9 @@ def db_connection() -> Generator[Connection, Any, None]:
     from sqlift import down, up
 
     with db_connect() as connection:
-        up(migrations_path="app/migrations")
+        up(migrations_path="app/database/migrations")
         yield connection
-        down(migrations_path="app/migrations")
+        down(migrations_path="app/database/migrations")
 
 
 @pytest.fixture

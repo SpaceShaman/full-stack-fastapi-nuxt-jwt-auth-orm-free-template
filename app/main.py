@@ -8,7 +8,7 @@ from users.api import users_router
 
 @asynccontextmanager
 async def migrate(app):
-    yield up()
+    yield up(migrations_path="database/migrations")
 
 
 app = FastAPI(lifespan=migrate)
