@@ -35,12 +35,12 @@ def mail_spy(mocker) -> Any:
     class MailClientSpy:
         def __init__(self):
             self.recipient = None
-            self.title = None
+            self.subject = None
             self.body = None
 
-        def send_mail(self, recipient: str, title: str, body: str) -> None:
-            self.recipient = recipient
-            self.title = title
+        def send_mail(self, recipients: list[str], subject: str, body: str) -> None:
+            self.recipients = recipients
+            self.subject = subject
             self.body = body
 
     mail = MailClientSpy()

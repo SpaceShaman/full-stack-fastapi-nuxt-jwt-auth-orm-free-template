@@ -30,8 +30,8 @@ def assert_user(connection, username: str, password: str, is_active: bool, email
 
 def assert_mail(mail_spy, recipient: str):
     activation_code = mail_spy.body.split(": ")[1]
-    assert mail_spy.recipient == recipient
-    assert mail_spy.title == "Activate your account"
+    assert mail_spy.recipients[0] == recipient
+    assert mail_spy.subject == "Activate your account"
     assert UUID(activation_code)
 
 
