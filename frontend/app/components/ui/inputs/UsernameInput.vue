@@ -7,7 +7,7 @@ defineProps({
 });
 </script>
 <template>
-  <TextInput placeholder="placeholder">
+  <TextInput :placeholder="placeholder">
     <template #prepend-icon>
       <svg
         xmlns="http://www.w3.org/2000/svg"
