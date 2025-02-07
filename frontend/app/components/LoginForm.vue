@@ -1,7 +1,10 @@
+<script setup lang="ts">
+const username = ref<string>();
+</script>
 <template>
   <form class="card-body">
     <div class="form-control">
-      <UsernameInput />
+      <UsernameInput v-model="username" />
     </div>
     <div class="form-control">
       <label class="input input-bordered flex items-center gap-2">
