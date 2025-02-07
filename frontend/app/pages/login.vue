@@ -41,7 +41,7 @@
           role="tabpanel"
           class="tab-content bg-base-100 border-base-300 rounded-box p-6"
         >
-          Register form
+          <RegisterForm />
         </div>
       </div>
     </div>
