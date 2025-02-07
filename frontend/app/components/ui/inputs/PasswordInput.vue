@@ -4,10 +4,15 @@ defineProps({
     type: String,
     default: "Password",
   },
+  errorMessage: String,
 });
 </script>
 <template>
-  <TextInput :placeholder="placeholder" type="password">
+  <TextInput
+    :placeholder="placeholder"
+    :error-message="errorMessage"
+    type="password"
+  >
     <template #prepend-icon>
       <svg
         xmlns="http://www.w3.org/2000/svg"

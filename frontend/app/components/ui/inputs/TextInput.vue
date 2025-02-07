@@ -17,10 +17,10 @@ defineProps({
       class="grow"
       :class="{ 'input-error': errorMessage }"
       :placeholder="placeholder"
-      :value="value"
+      v-model="value"
     />
-    <div class="label">
-      <span class="label-text-alt">{{ errorMessage }}</span>
-    </div>
   </label>
+  <div class="label">
+    <span class="label-text-alt">{{ errorMessage }}</span>
+  </div>
 </template>
