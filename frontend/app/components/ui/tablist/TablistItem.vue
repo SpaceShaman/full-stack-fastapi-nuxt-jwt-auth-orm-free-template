@@ -10,6 +10,7 @@ defineProps({
     default: "tabs",
   },
 });
+defineEmits(["click"]);
 </script>
 <template>
   <input

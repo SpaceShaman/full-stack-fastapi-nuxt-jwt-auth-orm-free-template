@@ -6,6 +6,7 @@ defineProps({
     type: String,
     default: "text",
   },
+  errorMessage: String,
 });
 </script>
 <template>
@@ -14,8 +15,12 @@ defineProps({
     <input
       :type="type"
       class="grow"
+      :class="{ 'input-error': errorMessage }"
       :placeholder="placeholder"
       :value="value"
     />
+    <div class="label">
+      <span class="label-text-alt">{{ errorMessage }}</span>
+    </div>
   </label>
 </template>

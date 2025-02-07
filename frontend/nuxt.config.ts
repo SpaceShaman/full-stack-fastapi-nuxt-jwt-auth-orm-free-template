@@ -3,7 +3,11 @@ export default defineNuxtConfig({
   srcDir: "app",
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@nuxtjs/color-mode",
+    "@vee-validate/nuxt",
+  ],
   colorMode: {
     preference: "system",
     fallback: "dark",

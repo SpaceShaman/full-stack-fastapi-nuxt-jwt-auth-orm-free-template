@@ -1,14 +1,32 @@
 <script setup lang="ts">
-const username = ref<string>();
-const password = ref<string>();
+import * as yup from "yup";
+
+const { errors, handleSubmit, defineField } = useForm({
+  validationSchema: yup.object().shape({
+    username: yup
+      .string()
+      .min(3, "Username must be at least 3 characters")
+      .required("Username is required"),
+    password: yup.string().required(),
+  }),
+});
+
+const [username] = defineField("username");
+const [password] = defineField("password");
+
+const submit = handleSubmit(async (value) => {
+  console.log(value);
+});
 </script>
 <template>
-  <form class="card-body">
+  <form class="card-body" @submit.prevent="submit">
     <div class="form-control">
-      <UsernameInput v-model="username" />
+      {{ username }}
+      <UsernameInput v-model="username" :error-message="errors.username" />
+      {{ errors.username }}
     </div>
     <div class="form-control">
-      <PasswordInput v-model="password" />
+      <PasswordInput v-model="password" :error-message="errors.password" />
       <div class="label">
         <span />
         <span
