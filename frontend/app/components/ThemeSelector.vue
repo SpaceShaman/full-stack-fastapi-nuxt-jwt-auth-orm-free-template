@@ -52,7 +52,7 @@ const themes = [
     </div>
     <ul
       tabindex="0"
-      class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl"
+      class="dropdown-content bg-base-300 rounded-box z-[1] shadow-2xl"
     >
       <ThemeInput :name="theme" v-for="theme in themes" :key="theme" />
     </ul>

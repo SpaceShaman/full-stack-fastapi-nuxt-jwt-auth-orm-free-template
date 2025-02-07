@@ -7,7 +7,7 @@ defineProps<{ name: string }>();
     <input
       type="radio"
       name="theme-dropdown"
-      class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+      class="theme-controller btn btn-sm btn-block btn-ghost"
       :aria-label="name.charAt(0).toUpperCase() + name.slice(1)"
       :value="name"
     />
