@@ -36,7 +36,7 @@ const themes = [
 </script>
 <template>
   <div class="dropdown">
-    <div tabindex="0" role="button" class="btn m-1">
+    <div tabindex="0" role="button" class="btn m-1 bg-base-100 border-base-300">
       Theme
       <svg
         width="12px"
