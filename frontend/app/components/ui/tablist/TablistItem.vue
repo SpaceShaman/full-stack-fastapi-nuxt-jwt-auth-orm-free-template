@@ -19,6 +19,7 @@ defineProps({
     class="tab"
     :aria-label="label"
     :checked="checked"
+    @click="$emit('click')"
   />
   <div
     role="tabpanel"
