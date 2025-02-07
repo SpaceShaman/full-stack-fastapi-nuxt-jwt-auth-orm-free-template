@@ -8,11 +8,7 @@ defineProps({
 });
 </script>
 <template>
-  <TextInput
-    :placeholder="placeholder"
-    :error-message="errorMessage"
-    type="email"
-  >
+  <TextInput :placeholder="placeholder" :error-message="errorMessage">
     <template #prepend-icon>
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import * as yup from "yup";
-
 const { errors, handleSubmit, defineField } = useForm({
-  validationSchema: yup.object().shape({
-    username: usernameValidator,
-    password: passwordValidator,
-  }),
+  validationSchema: validationSchema,
 });
 
 const [username] = defineField("username");

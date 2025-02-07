@@ -1,23 +1,32 @@
 <script setup lang="ts">
-const username = ref<string>();
-const password = ref<string>();
-const email = ref<string>();
-const passwordConfirmation = ref<string>();
+const { errors, handleSubmit, defineField } = useForm({
+  validationSchema: validationSchema,
+});
+
+const [username] = defineField("username");
+const [email] = defineField("email");
+const [password] = defineField("password");
+const [passwordConfirmation] = defineField("passwordConfirmation");
+
+const submit = handleSubmit(async (value) => {
+  console.log(value);
+});
 </script>
 <template>
-  <form class="card-body">
+  <form class="card-body" @submit.prevent="submit">
     <div class="form-control">
-      <UsernameInput v-model="username" />
+      <UsernameInput v-model="username" :error-message="errors.username" />
     </div>
     <div class="form-control">
-      <EmailInput v-model="email" />
+      <EmailInput v-model="email" :error-message="errors.email" />
     </div>
     <div class="form-control">
-      <PasswordInput v-model="password" />
+      <PasswordInput v-model="password" :error-message="errors.password" />
     </div>
     <div class="form-control">
       <PasswordInput
         v-model="passwordConfirmation"
+        :error-message="errors.passwordConfirmation"
         placeholder="Password confirmation"
       />
     </div>
