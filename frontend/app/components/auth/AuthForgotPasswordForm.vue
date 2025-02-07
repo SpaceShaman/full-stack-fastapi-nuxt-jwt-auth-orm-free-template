@@ -1,10 +1,18 @@
 <script setup lang="ts">
-const email = ref<string>();
+const { errors, handleSubmit, defineField } = useForm({
+  validationSchema: validationSchema,
+});
+
+const [email] = defineField("email");
+
+const submit = handleSubmit(async (value) => {
+  console.log(value);
+});
 </script>
 <template>
-  <form class="card-body">
+  <form class="card-body" @submit.prevent="submit">
     <div class="form-control">
-      <EmailInput v-model="email" />
+      <EmailInput v-model="email" :error-message="errors.email" />
     </div>
     <Button text="Send reset link" />
   </form>
