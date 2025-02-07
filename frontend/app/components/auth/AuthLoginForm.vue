@@ -7,7 +7,14 @@ const { errors, handleSubmit, defineField } = useForm({
       .string()
       .min(3, "Username must be at least 3 characters")
       .required("Username is required"),
-    password: yup.string().required(),
+    password: yup
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Password is weak"
+      )
+      .required("Password is required"),
   }),
 });
 
@@ -21,9 +28,7 @@ const submit = handleSubmit(async (value) => {
 <template>
   <form class="card-body" @submit.prevent="submit">
     <div class="form-control">
-      {{ username }}
       <UsernameInput v-model="username" :error-message="errors.username" />
-      {{ errors.username }}
     </div>
     <div class="form-control">
       <PasswordInput v-model="password" :error-message="errors.password" />

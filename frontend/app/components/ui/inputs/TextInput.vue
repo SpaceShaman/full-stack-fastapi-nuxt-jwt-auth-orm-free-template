@@ -10,17 +10,19 @@ defineProps({
 });
 </script>
 <template>
-  <label class="input input-bordered flex items-center gap-2">
+  <label
+    class="input input-bordered flex items-center gap-2"
+    :class="{ 'input-error': errorMessage }"
+  >
     <slot name="prepend-icon"></slot>
     <input
       :type="type"
       class="grow"
-      :class="{ 'input-error': errorMessage }"
       :placeholder="placeholder"
       v-model="value"
     />
   </label>
   <div class="label">
-    <span class="label-text-alt">{{ errorMessage }}</span>
+    <span class="label-text-alt text-error">{{ errorMessage }}</span>
   </div>
 </template>
