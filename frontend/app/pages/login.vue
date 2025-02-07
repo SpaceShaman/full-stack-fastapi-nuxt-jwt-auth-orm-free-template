@@ -8,11 +8,41 @@
           aplication template using Fastapi, Nuxt, TailwindCSS, DaisyUI, SQLite,
           JWT authentiation. You can find the source code and more interesting
           projects on my github
-          <a href="https://github.com/SpaceShaman">github.com/SpaceShaman</a>
+          <a class="link-hover" href="https://github.com/SpaceShaman"
+            >github.com/SpaceShaman</a
+          >
         </p>
       </div>
-      <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-        <LoginForm />
+
+      <div role="tablist" class="w-full max-w-sm shadow-2xl tabs tabs-lifted">
+        <input
+          type="radio"
+          name="tabs"
+          role="tab"
+          class="tab"
+          aria-label="Login"
+          checked
+        />
+        <div
+          role="tabpanel"
+          class="tab-content bg-base-100 border-base-300 rounded-box p-6"
+        >
+          <LoginForm />
+        </div>
+
+        <input
+          type="radio"
+          name="tabs"
+          role="tab"
+          class="tab"
+          aria-label="Register"
+        />
+        <div
+          role="tabpanel"
+          class="tab-content bg-base-100 border-base-300 rounded-box p-6"
+        >
+          Register form
+        </div>
       </div>
     </div>
   </div>
