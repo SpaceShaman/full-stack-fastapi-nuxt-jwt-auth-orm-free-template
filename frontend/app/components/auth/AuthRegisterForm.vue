@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { errors, handleSubmit, defineField } = useForm({
-  validationSchema: validationSchema,
+  validationSchema: registerSchema,
 });
 
 const [username] = defineField("username");
