@@ -6,6 +6,6 @@ const email = ref<string>();
     <div class="form-control">
       <EmailInput v-model="email" />
     </div>
-    <button class="btn btn-primary">Send reset link</button>
+    <Button text="Send reset link" />
   </form>
 </template>

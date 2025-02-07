@@ -18,6 +18,6 @@ const password = ref<string>();
         >
       </div>
     </div>
-    <button class="btn btn-primary">Login</button>
+    <Button text="Login" />
   </form>
 </template>

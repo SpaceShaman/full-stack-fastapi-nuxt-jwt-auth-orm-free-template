@@ -21,6 +21,6 @@ const passwordConfirmation = ref<string>();
         placeholder="Password confirmation"
       />
     </div>
-    <button class="btn btn-primary">Register</button>
+    <Button text="Register" />
   </form>
 </template>
