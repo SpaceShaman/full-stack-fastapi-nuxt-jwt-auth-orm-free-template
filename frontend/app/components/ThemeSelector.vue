@@ -54,7 +54,17 @@ const themes = [
       tabindex="0"
       class="dropdown-content bg-base-300 rounded-box z-[1] shadow-2xl overflow-y-scroll h-96"
     >
-      <ThemeInput :name="theme" v-for="theme in themes" :key="theme" />
+      <li v-for="theme in themes" :key="theme">
+        <input
+          type="radio"
+          name="theme-dropdown"
+          class="btn btn-sm btn-block btn-ghost"
+          :aria-label="theme.charAt(0).toUpperCase() + theme.slice(1)"
+          :value="theme"
+          :checked="$colorMode.preference === theme"
+          @click="$colorMode.preference = theme"
+        />
+      </li>
     </ul>
   </div>
 </template>
