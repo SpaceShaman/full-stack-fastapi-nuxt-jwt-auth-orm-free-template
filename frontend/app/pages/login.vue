@@ -14,7 +14,7 @@
         </p>
       </div>
 
-      <div role="tablist" class="w-full max-w-sm shadow-2xl tabs tabs-lifted">
+      <div role="tablist" class="w-full max-w-sm tabs tabs-lifted">
         <input
           type="radio"
           name="tabs"
@@ -25,7 +25,7 @@
         />
         <div
           role="tabpanel"
-          class="tab-content bg-base-100 border-base-300 rounded-box p-6"
+          class="tab-content bg-base-100 border-base-300 rounded-box shadow-2xl"
         >
           <LoginForm />
         </div>
@@ -39,7 +39,7 @@
         />
         <div
           role="tabpanel"
-          class="tab-content bg-base-100 border-base-300 rounded-box p-6"
+          class="tab-content bg-base-100 border-base-300 rounded-box shadow-2xl"
         >
           <RegisterForm />
         </div>
