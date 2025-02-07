@@ -28,7 +28,7 @@
       </label>
       <input
         type="password"
-        placeholder="password"
+        placeholder="Password"
         class="input input-bordered"
         required
       />
@@ -39,7 +39,7 @@
       </label>
       <input
         type="password"
-        placeholder="password"
+        placeholder="Password"
         class="input input-bordered"
         required
       />

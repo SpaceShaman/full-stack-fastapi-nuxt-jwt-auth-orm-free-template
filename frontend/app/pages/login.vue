@@ -1,3 +1,6 @@
+<script setup lang="ts">
+const forgotPasswordTab = ref(false);
+</script>
 <template>
   <div class="hero bg-base-200 min-h-screen">
     <div class="hero-content flex-col lg:flex-row-reverse">
@@ -22,12 +25,17 @@
           class="tab"
           aria-label="Login"
           checked
+          @click="forgotPasswordTab = false"
         />
         <div
           role="tabpanel"
           class="tab-content bg-base-100 border-base-300 rounded-box shadow-2xl"
         >
-          <LoginForm />
+          <LoginForm
+            v-if="!forgotPasswordTab"
+            @forgot-password="forgotPasswordTab = true"
+          />
+          <ForgotPasswordForm v-else />
         </div>
 
         <input
@@ -36,6 +44,7 @@
           role="tab"
           class="tab"
           aria-label="Register"
+          @click="forgotPasswordTab = false"
         />
         <div
           role="tabpanel"
