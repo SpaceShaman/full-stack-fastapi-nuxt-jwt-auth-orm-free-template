@@ -1,5 +1,13 @@
+<script setup lang="ts">
+defineProps({
+  placeholder: {
+    type: String,
+    default: "Password",
+  },
+});
+</script>
 <template>
-  <TextInput placeholder="Password" type="password">
+  <TextInput :placeholder="placeholder" type="password">
     <template #prepend-icon>
       <svg
         xmlns="http://www.w3.org/2000/svg"
