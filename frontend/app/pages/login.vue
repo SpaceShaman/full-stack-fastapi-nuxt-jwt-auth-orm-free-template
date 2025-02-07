@@ -4,16 +4,11 @@
       <div class="text-center lg:text-left">
         <h1 class="text-5xl font-bold">Login now!</h1>
         <p class="py-6">
-          I'm a full stack developer living in the milky way, focused much more
-          on the backend. I love designing IT systems based on clean
-          architecture. My native language is Python and my favorite
-          technologies include Django, Django Ninja, Pydantic, Celery, FastAPI,
-          Transformers, Marvin, Pytest, Factory Boy, Docker, Docker Compose, and
-          I also love creating user interfaces using Nuxt.js. I try to stay up
-          to date with all technological innovations and use the latest
-          technologies to facilitate work. I am also a fan of TDD and DDD
-          methodologies. You can find me on
-          <a href="https://github.com/SpaceShaman">GitHub</a>
+          Hi, I am SpaceShaman and I have prepared for you this full stack
+          aplication template using Fastapi, Nuxt, TailwindCSS, DaisyUI, SQLite,
+          JWT authentiation. You can find the source code and more interesting
+          projects on my github
+          <a href="https://github.com/SpaceShaman">github.com/SpaceShaman</a>
         </p>
       </div>
       <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
