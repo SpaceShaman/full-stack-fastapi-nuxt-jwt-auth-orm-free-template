@@ -11,16 +11,27 @@ useHead({
   <div class="hero bg-base-200 min-h-screen">
     <div class="hero-content flex-col lg:flex-row-reverse">
       <div class="text-center lg:text-left">
-        <h1 class="text-5xl font-bold">Login now!</h1>
-        <p class="py-6">
-          Hi, I am SpaceShaman and I have prepared for you this full stack
-          aplication template using Fastapi, Nuxt, TailwindCSS, DaisyUI, SQLite,
-          JWT authentiation. You can find the source code and more interesting
-          projects on my github
-          <a class="link-hover" href="https://github.com/SpaceShaman"
-            >github.com/SpaceShaman</a
-          >
-        </p>
+        <article class="prose">
+          <h1>Hello, Earthlings 🧑‍🚀</h1>
+          <p>
+            I'm a full stack developer living in the milky way, focused much
+            more on the backend. I love designing IT systems based on clean
+            architecture. My native language is Python and my favorite
+            technologies include Django, Django Ninja, Pydantic, Celery,
+            FastAPI, Transformers, Marvin, Pytest, Factory Boy, Docker, Docker
+            Compose, and I also love creating user interfaces using Nuxt.js. I
+            try to stay up to date with all technological innovations and use
+            the latest technologies to facilitate work. I am also a fan of TDD
+            and DDD methodologies.
+          </p>
+          <p>
+            You can find the source code and more interesting projects on my
+            github
+            <a class="link-hover" href="https://github.com/SpaceShaman"
+              >github.com/SpaceShaman</a
+            >
+          </p>
+        </article>
       </div>
       <AuthTabs />
     </div>
