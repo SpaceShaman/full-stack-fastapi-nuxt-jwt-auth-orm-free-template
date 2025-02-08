@@ -17,11 +17,6 @@ app.include_router(auth_router)
 app.include_router(users_router)
 
 
-@app.get("/test")
-async def test():
-    return {"message": "Hello, World!"}
-
-
 if __name__ == "__main__":
     import uvicorn
 
