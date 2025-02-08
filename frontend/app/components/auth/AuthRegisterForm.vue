@@ -8,12 +8,27 @@ const [email] = defineField("email");
 const [password] = defineField("password");
 const [passwordConfirmation] = defineField("passwordConfirmation");
 
+const errorMessage = ref();
+
 const submit = handleSubmit(async (value) => {
-  console.log(value);
+  try {
+    await register(value.username, value.email, value.password);
+  } catch (statusCode) {
+    if (statusCode === 403) {
+      errorMessage.value = "Username or email already exists";
+    } else {
+      errorMessage.value = "An error occurred";
+    }
+  }
 });
 </script>
 <template>
   <form class="card-body" @submit.prevent="submit">
+    <ErrorAlert
+      v-if="errorMessage"
+      :message="errorMessage"
+      @close="errorMessage = null"
+    />
     <div class="form-control">
       <UsernameInput v-model="username" :error-message="errors.username" />
     </div>
