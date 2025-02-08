@@ -6,7 +6,7 @@ const { errors, handleSubmit, defineField } = useForm({
 const [email] = defineField("email");
 
 const submit = handleSubmit(async (value) => {
-  console.log(value);
+  showInfoAlert("Reset link sent to your email");
 });
 </script>
 <template>

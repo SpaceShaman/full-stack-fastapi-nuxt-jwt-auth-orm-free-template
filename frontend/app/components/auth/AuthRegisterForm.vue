@@ -11,6 +11,9 @@ const [passwordConfirmation] = defineField("passwordConfirmation");
 const submit = handleSubmit(async (value) => {
   try {
     await register(value.username, value.email, value.password);
+    showSuccessAlert(
+      "Account created successfully, go to your email to activate it"
+    );
   } catch (statusCode) {
     if (statusCode === 403) {
       showErrorAlert("Username or email already exists");
