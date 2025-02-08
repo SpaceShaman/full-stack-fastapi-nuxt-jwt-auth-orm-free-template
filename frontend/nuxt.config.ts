@@ -24,4 +24,10 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  piniaPluginPersistedstate: {
+    storage: "cookies",
+    cookieOptions: {
+      sameSite: "lax",
+    },
+  },
 });
