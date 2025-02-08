@@ -3,7 +3,6 @@ name = "buywell"
 version = "0.1.0"
 description = ""
 authors = ["SpaceShaman <spaceshaman@tuta.io>"]
-readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"

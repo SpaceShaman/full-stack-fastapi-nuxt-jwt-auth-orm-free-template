@@ -7,6 +7,8 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
     "@vee-validate/nuxt",
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate",
   ],
   colorMode: {
     preference: "system",
