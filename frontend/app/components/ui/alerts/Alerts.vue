@@ -5,10 +5,10 @@ const { alerts } = useAlertsStore();
 <template>
   <div class="toast toast-top toast-center z-50">
     <Alert
-      v-for="(alert, index) in alerts"
-      :key="index"
+      v-for="alert in alerts"
+      :key="alert.id"
       :alert="alert"
-      @close="alerts.splice(index, 1)"
+      @close="alerts.splice(alerts.indexOf(alert), 1)"
     />
   </div>
 </template>
