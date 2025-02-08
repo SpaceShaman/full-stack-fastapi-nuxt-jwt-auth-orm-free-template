@@ -1,6 +1,5 @@
 <template>
   <Alerts />
-  <ThemeSelector class="absolute top-1 right-2" />
   <NuxtLayout>
     <NuxtLoadingIndicator />
     <NuxtPage />

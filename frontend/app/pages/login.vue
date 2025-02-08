@@ -7,6 +7,7 @@ useHead({
 });
 </script>
 <template>
+  <ThemeSelector class="absolute top-1 right-2" />
   <div class="hero bg-base-200 min-h-screen">
     <div class="hero-content flex-col lg:flex-row-reverse">
       <div class="text-center lg:text-left">
