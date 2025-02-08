@@ -1,0 +1,20 @@
+FROM python:3.12 AS prod
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+ENV PYTHONPATH="/app"
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+WORKDIR /app
+
+# Install system dependencies
+RUN apt update && apt upgrade -y
+
+# Install python dependencies
+RUN pip install poetry
+COPY poetry.lock pyproject.toml ./
+RUN poetry config virtualenvs.create false
+RUN poetry install --no-dev --no-interaction --no-ansi --no-root
+
+COPY app/ ./
+
+FROM prod AS dev
+RUN poetry install --no-interaction --no-ansi
