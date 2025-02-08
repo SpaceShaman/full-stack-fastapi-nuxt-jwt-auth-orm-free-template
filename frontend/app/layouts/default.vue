@@ -3,5 +3,7 @@
     <AuthLogoutButton />
     <ThemeSelector />
   </div>
-  <slot />
+  <div class="hero bg-base-200 min-h-screen">
+    <slot />
+  </div>
 </template>
