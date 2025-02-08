@@ -8,7 +8,7 @@ const [password] = defineField("password");
 
 const submit = handleSubmit(async (value) => {
   try {
-    await useAuthStore().login(value.username, value.password);
+    await login(value.username, value.password);
   } catch (statusCode) {
     if (statusCode === 401) {
       showErrorAlert("Invalid username or password");
