@@ -18,12 +18,12 @@ export const useAuthStore = defineStore("auth", {
       );
       this.token = token;
       this.authenticated = true;
-      await useRouter().push("/");
+      await navigateTo("/");
     },
     async logout() {
       this.token = "";
       this.authenticated = false;
-      await useRouter().push("/login");
+      await navigateTo("/login");
     },
   },
 });
