@@ -6,7 +6,12 @@ class Token(BaseModel):
     token_type: str
 
 
-class UserRegistration(BaseModel):
+class RegistrationSchema(BaseModel):
     username: str
     password: str
     email: str
+
+
+class Credentials(BaseModel):
+    username: str
+    password: str

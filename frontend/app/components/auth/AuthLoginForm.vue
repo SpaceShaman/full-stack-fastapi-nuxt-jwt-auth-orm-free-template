@@ -6,12 +6,27 @@ const { errors, handleSubmit, defineField } = useForm({
 const [username] = defineField("username");
 const [password] = defineField("password");
 
+const errorMessage = ref();
+
 const submit = handleSubmit(async (value) => {
-  console.log(value);
+  try {
+    await useAuthStore().login(value.username, value.password);
+  } catch (statusCode) {
+    if (statusCode === 401) {
+      errorMessage.value = "Invalid username or password";
+    } else {
+      errorMessage.value = "An error occurred";
+    }
+  }
 });
 </script>
 <template>
   <form class="card-body" @submit.prevent="submit">
+    <ErrorAlert
+      v-if="errorMessage"
+      :message="errorMessage"
+      @close="errorMessage = null"
+    />
     <div class="form-control">
       <UsernameInput v-model="username" :error-message="errors.username" />
     </div>

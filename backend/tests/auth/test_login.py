@@ -25,7 +25,7 @@ def setup_db(db_connection):
 
 
 def test_login_and_get_jwt(client, db_connection):
-    response = client.post(URL, data={"username": "user", "password": "password"})
+    response = client.post(URL, json={"username": "user", "password": "password"})
 
     assert response.status_code == 200
     response = response.json()
@@ -39,7 +39,7 @@ def test_login_and_get_jwt(client, db_connection):
 
 
 def test_login_with_wrong_password(client, db_connection):
-    response = client.post(URL, data={"username": "user", "password": "wrong-password"})
+    response = client.post(URL, json={"username": "user", "password": "wrong-password"})
 
     assert response.status_code == 401
     assert response.json() == {"detail": "Incorrect username or password"}
@@ -47,7 +47,7 @@ def test_login_with_wrong_password(client, db_connection):
 
 def test_login_with_wrong_username(client, db_connection):
     response = client.post(
-        URL, data={"username": "wrong-username", "password": "password"}
+        URL, json={"username": "wrong-username", "password": "password"}
     )
 
     assert response.status_code == 401
@@ -63,7 +63,7 @@ def test_login_with_not_active_user(client, db_connection):
     )
 
     response = client.post(
-        URL, data={"username": "not-active-user", "password": "password"}
+        URL, json={"username": "not-active-user", "password": "password"}
     )
 
     assert response.status_code == 401

@@ -1,7 +1,4 @@
-from typing import Annotated
-
-from fastapi import APIRouter, Depends, HTTPException
-from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import APIRouter, HTTPException
 
 from .exceptions import (
     IncorrectUsernameOrPassword,
@@ -9,16 +6,16 @@ from .exceptions import (
     UserAlreadyExists,
     UserIsNotActive,
 )
-from .schemas import Token, UserRegistration
+from .schemas import Credentials, RegistrationSchema, Token
 from .services import LoginService, RegisterService
 
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @auth_router.post("/login")
-async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> Token:
+async def login(credentials: Credentials) -> Token:
     try:
-        return LoginService().login(form_data.username, form_data.password)
+        return LoginService().login(credentials.username, credentials.password)
     except IncorrectUsernameOrPassword as e:
         raise HTTPException(
             status_code=401, detail="Incorrect username or password"
@@ -28,7 +25,7 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> T
 
 
 @auth_router.post("/register")
-async def register(user: UserRegistration) -> dict[str, str]:
+async def register(user: RegistrationSchema) -> dict[str, str]:
     try:
         RegisterService().register(user.username, user.password, user.email)
     except UserAlreadyExists as e:
