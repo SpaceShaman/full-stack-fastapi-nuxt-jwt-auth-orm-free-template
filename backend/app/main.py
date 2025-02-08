@@ -11,7 +11,7 @@ async def migrate(app):
     yield up(migrations_path="database/migrations")
 
 
-app = FastAPI(lifespan=migrate)
+app = FastAPI(lifespan=migrate, root_path="/api")
 
 app.include_router(auth_router)
 app.include_router(users_router)
