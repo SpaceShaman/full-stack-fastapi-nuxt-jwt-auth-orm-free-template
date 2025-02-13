@@ -4,7 +4,7 @@
 
 - ⚡ [**FastAPI**](https://fastapi.tiangolo.com) for the Python backend API.
     - 🗃 [**SQLite**](https://www.sqlite.org) as database.
-    - **ORM Free**: Use raw SQL queries by leveraging the repository pattern.
+    - 🆓 **ORM Free**: Use raw SQL queries by leveraging the repository pattern.
     - 🛡 JWT token authentication.
 - 🚀 [**Nuxt.js**](https://nuxt.com) for the frontend.
     - 🟦 [**TypeScript**](https://www.typescriptlang.org) for static type checking.
