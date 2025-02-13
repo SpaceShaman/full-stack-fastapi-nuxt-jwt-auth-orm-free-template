@@ -49,6 +49,23 @@
 - ✅ Tests with [Pytest](https://pytest.org).
 - 🚢 Deployment instructions using Docker Compose.
 
+### Login Page
+
+![Login](img/login.png)
+![Login](img/login-dark.png)
+
+### Register Page
+
+![Register](img/register.png)
+
+## Password Recovery
+
+![Password Recovery](img/password-recovery.png)
+
+## Theme Selector
+
+![Theme Selector](img/theme-selector.png)
+
 ## How To Use It
 
 You can **just fork or clone** this repository and use it as is.
