@@ -7,8 +7,9 @@ useHead({
 });
 </script>
 <template>
-  <div class="hero-content flex-col lg:flex-row-reverse">
-    <div class="text-center lg:text-left">
+  <Hero>
+    <AuthTabs />
+    <template #contentRight>
       <article class="prose">
         <h1>Hello, Earthlings 🧑‍🚀</h1>
         <p>
@@ -30,7 +31,6 @@ useHead({
           >
         </p>
       </article>
-    </div>
-    <AuthTabs />
-  </div>
+    </template>
+  </Hero>
 </template>
