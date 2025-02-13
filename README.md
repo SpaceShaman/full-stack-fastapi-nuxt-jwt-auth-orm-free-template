@@ -58,11 +58,11 @@
 
 ![Register](img/register.png)
 
-## Password Recovery
+### Password Recovery
 
 ![Password Recovery](img/password-recovery.png)
 
-## Theme Selector
+### Theme Selector
 
 ![Theme Selector](img/theme-selector.png)
 
