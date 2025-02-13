@@ -1,5 +1,8 @@
 # Full Stack FastAPI Nuxt.js JWT Auth ORM Free Template
 
+[![GitHub License](https://img.shields.io/github/license/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template)](https://github.com/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template?tab=MIT-1-ov-file)
+[![Tests](https://img.shields.io/github/actions/workflow/status/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template/release.yml?label=tests)](https://github.com/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template/blob/master/.github/workflows/tests.yml)
+[![Codecov](https://img.shields.io/codecov/c/github/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template)](https://codecov.io/gh/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template)
 [![Python](https://img.shields.io/badge/language-Python-yellow?logo=python&logoColor=yellow)](https://www.python.org/)
 [![TypeScript](https://img.shields.io/badge/language-TypeScript-yellow?logo=typescript&logoColor=yellow)](https://www.typescriptlang.org/)
 [![FastAPI](https://img.shields.io/badge/framework-FastAPI-green?logo=fastapi&logoColor=green)](https://fastapi.tiangolo.com/)
@@ -25,13 +28,18 @@
     - 🗃 [**SQLite**](https://www.sqlite.org) as database.
     - 🆓 **ORM Free**: Use raw SQL queries by leveraging the repository pattern.
     - 🛡 JWT token authentication.
-    - 🎨 Theme selector with 32 themes from [**daisyUI**](https://daisyui.com).
 - 🚀 [**Nuxt.js**](https://nuxt.com) for the frontend.
     - 🟦 [**TypeScript**](https://www.typescriptlang.org) for static type checking.
     - 🎨 [**TailwindCSS**](https://tailwindcss.com) for styling.
     - 🧩 [**daisyUI**](https://daisyui.com) for ready-to-use [**TailwindCSS**](https://tailwindcss.com) components.
     - 🔐 Middleware for authentication.
     - 📝 Form validation via [**VeeValidate**](https://vee-validate.logaretm.com) and [**Yup**](https://yup-docs.vercel.app/)
+    - 🎨 Theme selector with 32 themes from [**daisyUI**](https://daisyui.com).
+    - 🚨 Alerts and toasts via simple utility functions.
+        - ❌ Call `showErrorMessage('message')` to show an error message.
+        - ✅ Call `showSuccessMessage('message')` to show a success message.
+        - 💡 Call `showInfoMessage('message')` to show an info message.
+        - ⚠️ Call `showWarningMessage('message')` to show a warning message.
 - 🔑 **JWT** (JSON Web Token) authentication.
 - 📝 Registration with email based account activation.
 - 🔒 Secure password hashing.
