@@ -5,7 +5,13 @@ definePageMeta({
 useHead({
   title: "Account Activation",
 });
-
 const { activationCode } = useRoute().params;
+const code = Array.isArray(activationCode) ? activationCode[0] : activationCode;
+
+onMounted(() => {
+  activateAccount(code);
+});
 </script>
-<template>Acount activation {{ activationCode }}</template>
+<template>
+  <h1>Activating account...</h1>
+</template>
