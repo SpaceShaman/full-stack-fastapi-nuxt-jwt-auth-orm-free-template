@@ -70,6 +70,10 @@
 
 ![Alerts and Toasts](img/alerts-and-toasts.png)
 
+### Validation
+
+![Validation](img/validation.png)
+
 ## How To Use It
 
 You can **just fork or clone** this repository and use it as is.
