@@ -1,39 +1,36 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: false,
+  layout: "unlogged",
 });
 useHead({
   title: "Login Page",
 });
 </script>
 <template>
-  <ThemeSelector class="absolute top-1 right-2" />
-  <div class="hero bg-base-200 min-h-screen">
-    <div class="hero-content flex-col lg:flex-row-reverse">
-      <div class="text-center lg:text-left">
-        <article class="prose">
-          <h1>Hello, Earthlings 🧑‍🚀</h1>
-          <p>
-            I'm a full stack developer living in the milky way, focused much
-            more on the backend. I love designing IT systems based on clean
-            architecture. My native language is Python and my favorite
-            technologies include Django, Django Ninja, Pydantic, Celery,
-            FastAPI, Transformers, Marvin, Pytest, Factory Boy, Docker, Docker
-            Compose, and I also love creating user interfaces using Nuxt.js. I
-            try to stay up to date with all technological innovations and use
-            the latest technologies to facilitate work. I am also a fan of TDD
-            and DDD methodologies.
-          </p>
-          <p>
-            You can find the source code and more interesting projects on my
-            github
-            <a class="link-hover" href="https://github.com/SpaceShaman"
-              >github.com/SpaceShaman</a
-            >
-          </p>
-        </article>
-      </div>
-      <AuthTabs />
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left">
+      <article class="prose">
+        <h1>Hello, Earthlings 🧑‍🚀</h1>
+        <p>
+          I'm a full stack developer living in the milky way, focused much more
+          on the backend. I love designing IT systems based on clean
+          architecture. My native language is Python and my favorite
+          technologies include Django, Django Ninja, Pydantic, Celery, FastAPI,
+          Transformers, Marvin, Pytest, Factory Boy, Docker, Docker Compose, and
+          I also love creating user interfaces using Nuxt.js. I try to stay up
+          to date with all technological innovations and use the latest
+          technologies to facilitate work. I am also a fan of TDD and DDD
+          methodologies.
+        </p>
+        <p>
+          You can find the source code and more interesting projects on my
+          github
+          <a class="link-hover" href="https://github.com/SpaceShaman"
+            >github.com/SpaceShaman</a
+          >
+        </p>
+      </article>
     </div>
+    <AuthTabs />
   </div>
 </template>
