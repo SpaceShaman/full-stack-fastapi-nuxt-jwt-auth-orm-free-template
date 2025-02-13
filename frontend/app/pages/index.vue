@@ -1,3 +1,5 @@
 <template>
-  <h1>Index page</h1>
+  <Hero>
+    <h1>Index page</h1>
+  </Hero>
 </template>
