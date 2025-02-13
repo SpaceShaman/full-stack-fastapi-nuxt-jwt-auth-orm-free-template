@@ -1,5 +1,24 @@
 # Full Stack FastAPI Nuxt.js JWT Auth ORM Free Template
 
+[![Python](https://img.shields.io/badge/language-Python-yellow?logo=python&logoColor=yellow)](https://www.python.org/)
+[![TypeScript](https://img.shields.io/badge/language-TypeScript-yellow?logo=typescript&logoColor=yellow)](https://www.typescriptlang.org/)
+[![FastAPI](https://img.shields.io/badge/framework-FastAPI-green?logo=fastapi&logoColor=green)](https://fastapi.tiangolo.com/)
+[![Nuxt.js](https://img.shields.io/badge/framework-Nuxt-green?logo=nuxt.js&logoColor=green)](https://nuxt.com/)
+[![Docker](https://img.shields.io/badge/technology-Docker-blue?logo=docker&logoColor=blue)](https://www.docker.com/)
+[![Docker Compose](https://img.shields.io/badge/technology-Docker%20Compose-blue?logo=docker&logoColor=blue)](https://docs.docker.com/compose/)
+[![Pydantic](https://img.shields.io/badge/technology-Pydantic-blue?logo=pydantic&logoColor=blue)](https://docs.pydantic.dev)
+[![Tailwind CSS](https://img.shields.io/badge/styling-Tailwind%20CSS-blue?logo=tailwind-css&logoColor=blue)](https://tailwindcss.com/)
+[![daisyUI](https://img.shields.io/badge/styling-daisyUI-blue?logo=daisyui&logoColor=blue)](https://daisyui.com/)
+[![VeeValidate](https://img.shields.io/badge/validation-VeeValidate-blue?logo=vee-validate&logoColor=blue)](https://vee-validate.logaretm.com)
+[![Yup](https://img.shields.io/badge/validation-Yup-blue?logo=yup&logoColor=blue)](https://yup-docs.vercel.app/)
+[![Jinja](https://img.shields.io/badge/templating-Jinja-blue?logo=jinja&logoColor=blue)](https://jinja.palletsprojects.com/)
+[![JWT](https://img.shields.io/badge/authentication-JWT-blue?logo=json-web-tokens&logoColor=blue)](https://jwt.io/)
+[![Pytest](https://img.shields.io/badge/testing-Pytest-red?logo=pytest&logoColor=red)](https://docs.pytest.org/)
+[![SQLite](https://img.shields.io/badge/database-SQLite-lightgrey?logo=sqlite&logoColor=blue)](https://www.sqlite.org/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-black)](https://github.com/psf/black)
+[![Linting: Ruff](https://img.shields.io/badge/linting-Ruff-black?logo=ruff&logoColor=black)](https://github.com/astral-sh/ruff)
+[![Code formatter: Prettier](https://img.shields.io/badge/code%20formatter-Prettier-ff69b4)](https://prettier.io/)
+
 ## Technology Stack and Features
 
 - ⚡ [**FastAPI**](https://fastapi.tiangolo.com) for the Python backend API.
