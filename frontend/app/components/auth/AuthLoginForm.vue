@@ -7,15 +7,7 @@ const [username] = defineField("username");
 const [password] = defineField("password");
 
 const submit = handleSubmit(async (value) => {
-  try {
-    await login(value.username, value.password);
-  } catch (statusCode) {
-    if (statusCode === 401) {
-      showErrorAlert("Invalid username or password");
-    } else {
-      showErrorAlert("An error occurred");
-    }
-  }
+  await login(value.username, value.password);
 });
 </script>
 <template>
