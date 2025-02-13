@@ -1,7 +1,7 @@
 <template>
   <Hero>
-    <article class="prose">
+    <Prose>
       <h1>Index page</h1>
-    </article>
+    </Prose>
   </Hero>
 </template>
