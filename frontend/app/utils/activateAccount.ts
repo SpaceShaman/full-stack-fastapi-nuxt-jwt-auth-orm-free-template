@@ -7,8 +7,8 @@ export default async function activateAccount(activationCode: string) {
         navigateTo("/login");
       }
     },
-    onResponseError: (r) => {
-      if (r.response.status === 400) {
+    onResponseError: ({ response }) => {
+      if (response.status === 400) {
         showErrorAlert("Invalid activation code");
       } else {
         showErrorAlert("Failed to activate account");
