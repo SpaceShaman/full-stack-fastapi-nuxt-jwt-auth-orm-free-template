@@ -25,6 +25,7 @@
 ## Technology Stack and Features
 
 - ⚡ [**FastAPI**](https://fastapi.tiangolo.com) for the Python backend API.
+    - 📦 [**Poetry**](https://python-poetry.org) for dependency management.
     - 🗃 [**SQLite**](https://www.sqlite.org) as database.
     - 🆓 **ORM Free**: Use raw SQL queries by leveraging the repository pattern.
     - 🛡 JWT token authentication.
