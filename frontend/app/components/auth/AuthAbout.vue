@@ -1,5 +1,5 @@
 <template>
-  <Prose>
+  <Article>
     <h1>Hello, Earthlings 🧑‍🚀</h1>
     <p>
       I'm a full stack developer living in the milky way, focused much more on
@@ -13,9 +13,7 @@
     </p>
     <p>
       You can find the source code and more interesting projects on my github
-      <a class="link-hover" href="https://github.com/SpaceShaman"
-        >github.com/SpaceShaman</a
-      >
+      <a href="https://github.com/SpaceShaman">github.com/SpaceShaman</a>
     </p>
-  </Prose>
+  </Article>
 </template>

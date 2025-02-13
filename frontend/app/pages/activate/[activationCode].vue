@@ -14,8 +14,8 @@ onMounted(async () => {
 </script>
 <template>
   <Hero>
-    <Prose>
+    <Article>
       <h1>Activating account...</h1>
-    </Prose>
+    </Article>
   </Hero>
 </template>
