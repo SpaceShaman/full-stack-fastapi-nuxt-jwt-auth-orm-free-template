@@ -94,8 +94,8 @@ git remote -v
 
 origin    git@github.com:octocat/my-full-stack.git (fetch)
 origin    git@github.com:octocat/my-full-stack.git (push)
-upstream    git@github.com:fastapi/full-stack-fastapi-template.git (fetch)
-upstream    git@github.com:fastapi/full-stack-fastapi-template.git (push)
+upstream    git@github.com:SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template.git (fetch)
+upstream    git@github.com:SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template.git (push)
 ```
 
 - Pull the latest changes without merging:
