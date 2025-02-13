@@ -66,6 +66,10 @@
 
 ![Theme Selector](img/theme-selector.png)
 
+### Alerts and Toasts
+
+![Alerts and Toasts](img/alerts-and-toasts.png)
+
 ## How To Use It
 
 You can **just fork or clone** this repository and use it as is.
