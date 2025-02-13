@@ -8,8 +8,8 @@ useHead({
 const { activationCode } = useRoute().params;
 const code = Array.isArray(activationCode) ? activationCode[0] : activationCode;
 
-onMounted(() => {
-  activateAccount(code);
+onMounted(async () => {
+  await activateAccount(code);
 });
 </script>
 <template>
