@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from smtplib import SMTP_SSL
 
@@ -14,10 +15,11 @@ class MailClient:
             smtp.sendmail(SMTP_USER, recipients, message)
 
     def _generate_message(self, recipients: list[str], subject: str, body: str) -> str:
-        message = MIMEText(body)
+        message = MIMEMultipart()
         message["Subject"] = subject
         message["From"] = SMTP_USER
         message["To"] = ", ".join(recipients)
+        message.attach(MIMEText(body, "html"))
         return message.as_string()
 
 

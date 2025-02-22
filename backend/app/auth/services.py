@@ -3,7 +3,7 @@ from typing import Protocol
 from uuid import uuid4
 
 import jwt
-from core.settings import BASE_URL, SECRET_KEY
+from core.settings import SECRET_KEY
 from mail.services import MailService
 from passlib.context import CryptContext
 from users.repositorys import UserRepository
@@ -30,7 +30,7 @@ class RegisterRepositoryInterface(Protocol):
 
 
 class MailServiceInterface(Protocol):
-    def send_activation_code(self, email: str, activation_url: str) -> None: ...
+    def send_activation_code(self, email: str, activation_code: str) -> None: ...
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -74,12 +74,11 @@ class RegisterService:
             raise PasswordIsTooWeak("Password is too weak")
         hashed_password = self._generate_password_hash(password)
         activation_code = self._generate_activation_code()
-        activation_url = f"{BASE_URL}/activate/{activation_code}"
         try:
             self.user_repository.create_user(
                 username, hashed_password, email, activation_code
             )
-            self.mail_service.send_activation_code(email, activation_url)
+            self.mail_service.send_activation_code(email, activation_code)
         except Exception as e:
             raise UserAlreadyExists("User already exists") from e
 
