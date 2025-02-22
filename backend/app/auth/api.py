@@ -21,7 +21,7 @@ async def login(credentials: Credentials) -> Token:
             status_code=401, detail="Incorrect username or password"
         ) from e
     except UserIsNotActive as e:
-        raise HTTPException(status_code=401, detail="User is not active") from e
+        raise HTTPException(status_code=403, detail="User is not active") from e
 
 
 @auth_router.post("/register")

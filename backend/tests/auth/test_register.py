@@ -1,3 +1,4 @@
+import re
 from uuid import UUID
 
 from passlib.context import CryptContext
@@ -29,7 +30,8 @@ def assert_user(connection, username: str, password: str, is_active: bool, email
 
 
 def assert_mail(mail_spy, recipient: str):
-    activation_code = mail_spy.body.split("/activate/")[1]
+    if activation_code := re.search('/activate/(.*)"', mail_spy.body):
+        activation_code = activation_code[1]
     assert mail_spy.recipients[0] == recipient
     assert mail_spy.subject == "Activate your account"
     assert UUID(activation_code)

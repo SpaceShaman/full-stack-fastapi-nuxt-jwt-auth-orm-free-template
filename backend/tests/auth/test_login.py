@@ -66,5 +66,5 @@ def test_login_with_not_active_user(client, db_connection):
         URL, json={"username": "not-active-user", "password": "password"}
     )
 
-    assert response.status_code == 401
+    assert response.status_code == 403
     assert response.json() == {"detail": "User is not active"}
