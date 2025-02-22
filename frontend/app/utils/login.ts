@@ -11,8 +11,8 @@ export default async function login(username: string, password: string) {
     onResponseError: ({ response }) => {
       if (response.status === 401) {
         showErrorAlert("Invalid username or password");
-      } else {
-        showErrorAlert("An error occurred");
+      } else if (response.status === 403) {
+        showErrorAlert("Account is not activated, please check your email");
       }
     },
   });
