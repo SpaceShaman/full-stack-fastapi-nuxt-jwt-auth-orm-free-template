@@ -11,9 +11,9 @@ class MailService:
     def __init__(self) -> None:
         self.client: MailClientInterface = MailClient()
 
-    def send_activation_code(self, email: str, activation_code: str) -> None:
+    def send_activation_code(self, email: str, activation_url: str) -> None:
         self.client.send_mail(
             [email],
             "Activate your account",
-            f"Activation code: {activation_code}",
+            f"Click the link to activate your account: {activation_url}",
         )

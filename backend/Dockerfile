@@ -14,9 +14,9 @@ RUN poetry install --no-interaction --no-ansi --no-root --without dev
 
 COPY app/ ./
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 FROM prod AS dev
 RUN poetry install --no-interaction --no-ansi --no-root
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
