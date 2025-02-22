@@ -10,9 +10,10 @@ def _create_user(
     hashed_password: str,
     is_active: bool = False,
     activation_code: str = "94121a26-91c5-4303-b456-654818926474",
+    email: str = "test@test.com",
 ):
     connection.execute(
-        f"INSERT INTO users (username, password, is_active, activation_code, email) VALUES ('{username}', '{hashed_password}', {is_active}, '{activation_code}', 'test@test.com')"
+        f"INSERT INTO users (username, password, is_active, activation_code, email) VALUES ('{username}', '{hashed_password}', {is_active}, '{activation_code}', '{email}')"
     )
     connection.commit()
 
@@ -69,6 +70,26 @@ def test_try_register_existing_user(client, db_connection):
         "/auth/register",
         json={
             "username": "new-user",
+            "password": "Passw0rd$",
+            "email": "test@test.com",
+        },
+    )
+
+    assert response.status_code == 403
+
+
+def test_try_register_user_with_existing_email(client, db_connection):
+    _create_user(
+        db_connection,
+        "new-user",
+        "xxxx",
+        email="test@test.com",
+    )
+
+    response = client.post(
+        "/auth/register",
+        json={
+            "username": "another-user",
             "password": "Passw0rd$",
             "email": "test@test.com",
         },

@@ -6,7 +6,7 @@ URL = "/users/me"
 
 def _create_user(connection, username: str):
     connection.execute(
-        f"INSERT INTO users (username, password) VALUES ('{username}', 'xxx')"
+        f"INSERT INTO users (username, password, email) VALUES ('{username}', 'xxx', 'test@test.com')"
     )
     connection.commit()
 

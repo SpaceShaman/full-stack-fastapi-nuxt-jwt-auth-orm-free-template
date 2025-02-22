@@ -7,10 +7,14 @@ URL = "/auth/login"
 
 
 def _create_user(
-    connection, username: str, hashed_password: str, is_active: bool = True
+    connection,
+    username: str,
+    hashed_password: str,
+    is_active: bool = True,
+    email: str = "test@test.com",
 ):
     connection.execute(
-        f"INSERT INTO users (username, password, is_active) VALUES ('{username}', '{hashed_password}', {is_active})"
+        f"INSERT INTO users (username, password, is_active, email) VALUES ('{username}', '{hashed_password}', {is_active}, '{email}')"
     )
     connection.commit()
 
@@ -60,6 +64,7 @@ def test_login_with_not_active_user(client, db_connection):
         "not-active-user",
         "$2b$12$AIflVbmr.Re2WQ1EhvB2Yu2WRPFklJAjMfQ8LGPiCYDUrcXtxslqe",
         False,
+        "not-active@test.com",
     )
 
     response = client.post(

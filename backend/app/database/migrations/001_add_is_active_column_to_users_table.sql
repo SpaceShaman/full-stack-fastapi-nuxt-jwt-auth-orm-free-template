@@ -1,6 +1,0 @@
---UP
-ALTER TABLE users
-ADD COLUMN is_active BOOLEAN DEFAULT FALSE;
---DOWN
-ALTER TABLE users
-DROP COLUMN is_active;
