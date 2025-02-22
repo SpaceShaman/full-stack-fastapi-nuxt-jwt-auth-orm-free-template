@@ -9,7 +9,10 @@ export default defineNuxtRouteMiddleware((to) => {
 });
 
 function isPublicPath(path: string): boolean {
-  const publicPaths = ["/login", /^\/activate\/?(\w+)?$/];
+  const publicPaths = [
+    "/login",
+    /^\/activate\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/,
+  ];
   return publicPaths.some((publicPath) => {
     if (typeof publicPath === "string") {
       return path === publicPath;
