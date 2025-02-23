@@ -12,3 +12,7 @@ class UserIsNotActive(Exception):
 
 class PasswordIsTooWeak(Exception):
     pass
+
+
+class ActivationCodeNotFound(Exception):
+    pass

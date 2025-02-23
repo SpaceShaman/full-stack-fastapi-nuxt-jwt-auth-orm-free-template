@@ -164,3 +164,9 @@ def test_activate_registered_user(client, db_connection):
 
     assert response.status_code == 200
     assert_user(db_connection, "new-user", "password", True, "test@test.com")
+
+
+def test_try_activate_not_existing_user(client, db_connection):
+    response = client.get("/auth/activate/94121a26-91c5-4303-b456-654818926474")
+
+    assert response.status_code == 404

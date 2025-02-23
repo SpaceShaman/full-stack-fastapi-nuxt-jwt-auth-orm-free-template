@@ -25,8 +25,10 @@ def test_get_me(client, db_connection):
     response = client.get(URL, headers={"Authorization": f"Bearer {jwt_token}"})
 
     assert response.status_code == 200
-    response = response.json()
-    assert response["username"] == "user"
+    assert response.json() == {
+        "username": "user",
+        "is_active": False,
+    }
 
 
 def test_get_me_invalid_token(client):

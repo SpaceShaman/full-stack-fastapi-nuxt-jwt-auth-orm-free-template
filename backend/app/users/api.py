@@ -8,6 +8,6 @@ from .schemas import User
 users_router = APIRouter(prefix="/users", tags=["users"])
 
 
-@users_router.get("/me")
+@users_router.get("/me", response_model_exclude_none=True)
 async def get_me(user: Annotated[User, Depends(get_current_user)]) -> User:
     return user

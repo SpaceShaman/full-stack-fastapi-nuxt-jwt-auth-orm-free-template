@@ -41,5 +41,8 @@ async def register(request: Request, user: RegistrationSchema) -> dict[str, str]
 
 @auth_router.get("/activate/{activation_code}")
 async def activate(activation_code: str) -> dict[str, str]:
-    RegisterService().activate(activation_code)
+    try:
+        RegisterService().activate(activation_code)
+    except Exception as e:
+        raise HTTPException(status_code=404, detail="Activation code not found") from e
     return {"activation": "success"}

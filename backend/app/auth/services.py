@@ -7,9 +7,10 @@ from core.settings import SECRET_KEY
 from mail.services import MailService
 from passlib.context import CryptContext
 from users.repositorys import UserRepository
-from users.schemas import UserWithPassword
+from users.schemas import User
 
 from .exceptions import (
+    ActivationCodeNotFound,
     IncorrectUsernameOrPassword,
     PasswordIsTooWeak,
     UserAlreadyExists,
@@ -19,14 +20,15 @@ from .schemas import Token
 
 
 class LoginRepositoryInterface(Protocol):
-    def get_user_with_password(self, username: str) -> UserWithPassword | None: ...
+    def get_user_with_password(self, username: str) -> User | None: ...
 
 
 class RegisterRepositoryInterface(Protocol):
     def create_user(
         self, username: str, password: str, email: str, activation_code: str
     ) -> None: ...
-    def activate_user(self, activation_code: str) -> None: ...
+    def get_user_by_activation_code(self, activation_code: str) -> User | None: ...
+    def update_user(self, user: User) -> None: ...
 
 
 class MailServiceInterface(Protocol):
@@ -83,7 +85,12 @@ class RegisterService:
             raise UserAlreadyExists("User already exists") from e
 
     def activate(self, activation_code: str) -> None:
-        self.user_repository.activate_user(activation_code)
+        user = self.user_repository.get_user_by_activation_code(activation_code)
+        if not user:
+            raise ActivationCodeNotFound("Activation code not found")
+        user.is_active = True
+        user.activation_code = None
+        self.user_repository.update_user(user)
 
     def _generate_password_hash(self, password: str) -> str:
         return pwd_context.hash(password)
