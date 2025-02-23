@@ -1,9 +1,12 @@
 export default async function login(username: string, password: string) {
-  const { token } = await useNuxtApp().$api<{ token: string }>("/auth/login", {
+  await useNuxtApp().$api<{ token: string }>("/auth/login", {
     method: "POST",
     body: { username, password },
     onResponse: ({ response }) => {
       if (response.ok) {
+        const authStore = useAuthStore();
+        authStore.token = response._data.access_token;
+        authStore.authenticated = true;
         showSuccessAlert("Logged in successfully");
         navigateTo("/");
       }
@@ -16,8 +19,4 @@ export default async function login(username: string, password: string) {
       }
     },
   });
-  const authStore = useAuthStore();
-  authStore.token = token;
-  authStore.authenticated = true;
-  await navigateTo("/");
 }

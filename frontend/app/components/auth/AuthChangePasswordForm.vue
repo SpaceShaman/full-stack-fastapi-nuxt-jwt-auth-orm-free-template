@@ -6,7 +6,9 @@ const { errors, handleSubmit, defineField } = useForm({
 const [oldPassword] = defineField("oldPassword");
 const [newPassword] = defineField("newPassword");
 
-const submit = handleSubmit(async (value) => {});
+const submit = handleSubmit(async (value) => {
+  await changePassword(value.oldPassword, value.newPassword);
+});
 </script>
 <template>
   <form class="card-body" @submit.prevent="submit">

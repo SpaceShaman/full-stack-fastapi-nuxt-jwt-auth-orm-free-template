@@ -35,7 +35,7 @@ function isDevelopment() {
 
 function handleErrors(response: Response) {
   if (response.status === 401) {
-    useAuthStore().logout();
+    logout();
   } else if (response.status === 403) {
     displayError(403, "You are not authorized to access this resource.");
   } else {
