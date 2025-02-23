@@ -1,7 +1,7 @@
 <template>
   <Hero>
     <Article>
-      <h1>Index page</h1>
+      <AuthChangePasswordForm />
     </Article>
   </Hero>
 </template>
