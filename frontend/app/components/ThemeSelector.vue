@@ -61,7 +61,6 @@ const themes = [
           class="btn btn-sm btn-block btn-ghost"
           :aria-label="theme.charAt(0).toUpperCase() + theme.slice(1)"
           :value="theme"
-          :checked="$colorMode.preference === theme"
           @click="$colorMode.preference = theme"
         />
       </li>
