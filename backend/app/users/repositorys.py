@@ -18,18 +18,19 @@ class UserRepository:
             )
 
     def get_user(self, username: str) -> User | None:
-        with db_connect() as connection:
-            cursor = connection.execute(
-                "SELECT username, is_active FROM users WHERE username = ?", (username,)
-            )
-            user = cursor.fetchone()
-            return User(username=user[0], is_active=user[1]) if user else None
+        return self._get_user("username = ?", (username,))
 
     def get_user_by_activation_code(self, activation_code: str) -> User | None:
+        return self._get_user(
+            "activation_code = ?",
+            (activation_code,),
+        )
+
+    def _get_user(self, where: str, parms: tuple) -> User | None:
         with db_connect() as connection:
             cursor = connection.execute(
-                "SELECT username, is_active FROM users WHERE activation_code = ?",
-                (activation_code,),
+                f"SELECT username, is_active FROM users WHERE {where}",
+                parms,
             )
             user = cursor.fetchone()
             return User(username=user[0], is_active=user[1]) if user else None
