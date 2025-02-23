@@ -15,3 +15,8 @@ class RegistrationSchema(BaseModel):
 class Credentials(BaseModel):
     username: str
     password: str
+
+
+class ChangePasswordSchema(BaseModel):
+    old_password: str
+    new_password: str
