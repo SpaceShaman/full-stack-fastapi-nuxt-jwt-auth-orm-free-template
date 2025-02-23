@@ -1,4 +1,8 @@
-from fastapi import APIRouter, HTTPException, Request
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, HTTPException, Request
+from users.dependencies import get_current_user
+from users.schemas import User
 
 from .exceptions import (
     IncorrectUsernameOrPassword,
@@ -46,3 +50,10 @@ async def activate(activation_code: str) -> dict[str, str]:
     except Exception as e:
         raise HTTPException(status_code=404, detail="Activation code not found") from e
     return {"activation": "success"}
+
+
+@auth_router.get("/change-password")
+async def change_password(
+    user: Annotated[User, Depends(get_current_user)],
+) -> dict[str, str]:
+    return {"change-password": "success"}

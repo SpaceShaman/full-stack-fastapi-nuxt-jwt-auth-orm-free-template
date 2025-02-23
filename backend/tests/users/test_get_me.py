@@ -19,10 +19,8 @@ def setup_db(db_connection):
     )
 
 
-def test_get_me(client, db_connection):
-    jwt_token = jwt.encode({"sub": "user"}, "test", algorithm="HS256")
-
-    response = client.get(URL, headers={"Authorization": f"Bearer {jwt_token}"})
+def test_get_me(logged_client, db_connection):
+    response = logged_client.get(URL)
 
     assert response.status_code == 200
     assert response.json() == {

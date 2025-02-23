@@ -3,6 +3,7 @@ from pathlib import Path
 from sqlite3 import Connection
 from typing import Any, Generator
 
+import jwt
 import pytest
 from fastapi.testclient import TestClient
 
@@ -31,6 +32,13 @@ def client() -> TestClient:
     from main import app
 
     return TestClient(app)
+
+
+@pytest.fixture
+def logged_client(client: TestClient) -> TestClient:
+    jwt_token = jwt.encode({"sub": "user"}, "test", algorithm="HS256")
+    client.headers.update({"Authorization": f"Bearer {jwt_token}"})
+    return client
 
 
 @pytest.fixture
