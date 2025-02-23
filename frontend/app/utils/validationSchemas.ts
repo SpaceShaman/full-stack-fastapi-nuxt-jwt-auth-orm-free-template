@@ -40,4 +40,14 @@ const forgotPasswordSchema = yup.object().shape({
   email: emailValidator,
 });
 
-export { forgotPasswordSchema, loginSchema, registerSchema };
+const changePasswordSchema = yup.object().shape({
+  oldPassword: yup.string().required("Old password is required"),
+  newPassword: passwordValidator,
+});
+
+export {
+  changePasswordSchema,
+  forgotPasswordSchema,
+  loginSchema,
+  registerSchema,
+};
