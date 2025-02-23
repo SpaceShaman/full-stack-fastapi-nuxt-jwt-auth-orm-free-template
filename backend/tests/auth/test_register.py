@@ -18,7 +18,13 @@ def _create_user(
     connection.commit()
 
 
-def assert_user(connection, username: str, password: str, is_active: bool, email: str):
+def assert_user(
+    connection,
+    username: str,
+    password: str,
+    is_active: bool,
+    email: str,
+):
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
     user = connection.execute(
         f"SELECT username, password, is_active, email, activation_code FROM users WHERE username = '{username}'"
@@ -27,7 +33,10 @@ def assert_user(connection, username: str, password: str, is_active: bool, email
     assert pwd_context.verify(password, user[1])
     assert user[2] == is_active
     assert user[3] == email
-    assert UUID(user[4])
+    if is_active:
+        assert user[4] is None
+    else:
+        assert UUID(user[4])
 
 
 def assert_mail(mail_spy, recipient: str):

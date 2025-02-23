@@ -47,7 +47,7 @@ class UserRepository:
     def update_user(self, user: User) -> None:
         with db_connect() as connection:
             connection.execute(
-                "UPDATE users SET is_active = ? WHERE username = ?",
-                (user.is_active, user.username),
+                "UPDATE users SET is_active = ?, activation_code = ? WHERE username = ?",
+                (user.is_active, user.activation_code, user.username),
             )
             connection.commit()
