@@ -10,7 +10,7 @@ useHead({
   <Hero>
     <AuthTabs />
     <template #contentRight>
-      <AuthAbout />
+      <AuthAbout class="ml-8" />
     </template>
   </Hero>
 </template>
