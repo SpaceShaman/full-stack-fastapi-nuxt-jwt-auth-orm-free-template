@@ -107,5 +107,7 @@ class ChangePasswordService:
         user = self.user_repository.get_user_with_password(username)
         if not user or not verify_password(passwords.old_password, user.password):
             raise IncorrectUsernameOrPassword("Incorrect username or password")
+        if not check_password_strength(passwords.new_password):
+            raise PasswordIsTooWeak("Password is too weak")
         user.password = generate_password_hash(passwords.new_password)
         self.user_repository.update_user(user)

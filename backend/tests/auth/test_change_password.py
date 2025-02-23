@@ -41,8 +41,28 @@ def assert_user(
 def test_change_password(logged_client, db_connection):
     response = logged_client.post(
         URL,
-        json={"old_password": "password", "new_password": "new_password"},
+        json={"old_password": "password", "new_password": "Passw0rd$"},
     )
 
     assert response.status_code == 200
-    assert_user(db_connection, "user", "new_password")
+    assert_user(db_connection, "user", "Passw0rd$")
+
+
+def test_try_change_password_with_wrong_old_password(logged_client, db_connection):
+    response = logged_client.post(
+        URL,
+        json={"old_password": "wrong_password", "new_password": "Passw0rd$"},
+    )
+
+    assert response.status_code == 401
+    assert_user(db_connection, "user", "password")
+
+
+def test_try_change_password_with_weak_password(logged_client, db_connection):
+    response = logged_client.post(
+        URL,
+        json={"old_password": "password", "new_password": "password"},
+    )
+
+    assert response.status_code == 401
+    assert_user(db_connection, "user", "password")

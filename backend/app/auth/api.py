@@ -56,5 +56,12 @@ async def activate(activation_code: str) -> dict[str, str]:
 async def change_password(
     user: Annotated[User, Depends(get_current_user)], passwords: ChangePasswordSchema
 ) -> dict[str, str]:
-    ChangePasswordService().change_password(user.username, passwords)
+    try:
+        ChangePasswordService().change_password(user.username, passwords)
+    except IncorrectUsernameOrPassword as e:
+        raise HTTPException(
+            status_code=401, detail="Incorrect username or password"
+        ) from e
+    except PasswordIsTooWeak as e:
+        raise HTTPException(status_code=401, detail="Password is too weak") from e
     return {"change-password": "success"}
