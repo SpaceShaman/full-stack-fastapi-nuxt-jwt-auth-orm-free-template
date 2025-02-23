@@ -11,7 +11,7 @@ from .exceptions import (
     UserIsNotActive,
 )
 from .schemas import ChangePasswordSchema, Credentials, RegistrationSchema, Token
-from .services import LoginService, RegisterService
+from .services import ChangePasswordService, LoginService, RegisterService
 
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -56,4 +56,5 @@ async def activate(activation_code: str) -> dict[str, str]:
 async def change_password(
     user: Annotated[User, Depends(get_current_user)], passwords: ChangePasswordSchema
 ) -> dict[str, str]:
+    ChangePasswordService().change_password(user.username, passwords)
     return {"change-password": "success"}

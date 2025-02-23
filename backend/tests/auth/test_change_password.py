@@ -45,4 +45,4 @@ def test_change_password(logged_client, db_connection):
     )
 
     assert response.status_code == 200
-    # assert assert_user(db_connection, "user", "new_password")
+    assert_user(db_connection, "user", "new_password")

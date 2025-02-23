@@ -48,7 +48,26 @@ class UserRepository:
     def update_user(self, user: User) -> None:
         with db_connect() as connection:
             connection.execute(
-                "UPDATE users SET is_active = ?, activation_code = ? WHERE username = ?",
-                (user.is_active, user.activation_code, user.username),
+                self._build_update_query(user),
+                self._get_update_parms(user),
             )
             connection.commit()
+
+    def _build_update_query(self, user: User) -> str:
+        query = "UPDATE users SET activation_code = ?, "
+        if user.is_active is not None:
+            query += "is_active = ?, "
+        if user.password:
+            query += "password = ?, "
+        query = query[:-2]
+        query += " WHERE username = ?"
+        return query
+
+    def _get_update_parms(self, user: User) -> tuple:
+        parms: list[str | bool | None] = [user.activation_code]
+        if user.is_active is not None:
+            parms.append(user.is_active)
+        if user.password:
+            parms.append(user.password)
+        parms.append(user.username)
+        return tuple(parms)
