@@ -5,7 +5,6 @@ from uuid import uuid4
 import jwt
 from core.settings import SECRET_KEY
 from mail.services import MailService
-from passlib.context import CryptContext
 from users.repositorys import UserRepository
 from users.schemas import User
 
@@ -15,6 +14,11 @@ from .exceptions import (
     PasswordIsTooWeak,
     UserAlreadyExists,
     UserIsNotActive,
+)
+from .password_utils import (
+    check_password_strength,
+    generate_password_hash,
+    verify_password,
 )
 from .schemas import ChangePasswordSchema, Token
 
@@ -40,16 +44,13 @@ class MailServiceInterface(Protocol):
     def send_activation_code(self, email: str, activation_code: str) -> None: ...
 
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
 class LoginService:
     def __init__(self) -> None:
         self.user_repository: LoginRepositoryInterface = UserRepository()
 
     def login(self, username: str, password: str) -> Token:
         user = self.user_repository.get_user_with_password(username)
-        if not user or not _verify_password(password, user.password):
+        if not user or not verify_password(password, user.password):
             raise IncorrectUsernameOrPassword("Incorrect username or password")
         if not user.is_active:
             raise UserIsNotActive("User is not active")
@@ -74,9 +75,9 @@ class RegisterService:
         self.mail_service: MailServiceInterface = MailService()
 
     def register(self, username: str, password: str, email: str) -> None:
-        if not self._check_password_strength(password):
+        if not check_password_strength(password):
             raise PasswordIsTooWeak("Password is too weak")
-        hashed_password = _generate_password_hash(password)
+        hashed_password = generate_password_hash(password)
         activation_code = self._generate_activation_code()
         try:
             self.user_repository.create_user(
@@ -97,17 +98,6 @@ class RegisterService:
     def _generate_activation_code(self) -> str:
         return str(uuid4())
 
-    def _check_password_strength(self, password: str) -> bool:
-        if len(password) < 8:
-            return False
-        if not any(char.isdigit() for char in password):
-            return False
-        if not any(char.isupper() for char in password):
-            return False
-        if all((char.isalnum() for char in password)):
-            return False
-        return any((char.islower() for char in password))
-
 
 class ChangePasswordService:
     def __init__(self) -> None:
@@ -115,15 +105,7 @@ class ChangePasswordService:
 
     def change_password(self, username: str, passwords: ChangePasswordSchema) -> None:
         user = self.user_repository.get_user_with_password(username)
-        if not user or not _verify_password(passwords.old_password, user.password):
+        if not user or not verify_password(passwords.old_password, user.password):
             raise IncorrectUsernameOrPassword("Incorrect username or password")
-        user.password = _generate_password_hash(passwords.new_password)
+        user.password = generate_password_hash(passwords.new_password)
         self.user_repository.update_user(user)
-
-
-def _verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
-
-
-def _generate_password_hash(password: str) -> str:
-    return pwd_context.hash(password)
