@@ -1,5 +1,5 @@
 <template>
-  <div role="tablist" class="w-full max-w-sm tabs tabs-lifted">
-    <slot />
-  </div>
+	<div role="tablist" class="tabs tabs-lifted w-full max-w-sm">
+		<slot />
+	</div>
 </template>

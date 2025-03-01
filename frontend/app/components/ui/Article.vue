@@ -1,5 +1,5 @@
 <template>
-  <article class="prose">
-    <slot />
-  </article>
+	<article class="prose">
+		<slot />
+	</article>
 </template>

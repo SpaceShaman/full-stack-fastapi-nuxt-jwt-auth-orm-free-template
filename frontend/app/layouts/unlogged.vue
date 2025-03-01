@@ -1,6 +1,6 @@
 <template>
-  <div class="absolute top-1 right-2">
-    <ThemeSelector />
-  </div>
-  <slot />
+	<div class="absolute right-2 top-1">
+		<ThemeSelector />
+	</div>
+	<slot />
 </template>

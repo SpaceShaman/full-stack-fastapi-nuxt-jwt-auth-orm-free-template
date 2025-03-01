@@ -1,17 +1,17 @@
 function showErrorAlert(message: string) {
-  useAlertsStore().addAlert({ message, type: "error" });
+	useAlertsStore().addAlert({ message, type: 'error' })
 }
 
 function showSuccessAlert(message: string) {
-  useAlertsStore().addAlert({ message, type: "success" });
+	useAlertsStore().addAlert({ message, type: 'success' })
 }
 
 function showInfoAlert(message: string) {
-  useAlertsStore().addAlert({ message, type: "info" });
+	useAlertsStore().addAlert({ message, type: 'info' })
 }
 
 function showWarningAlert(message: string) {
-  useAlertsStore().addAlert({ message, type: "warning" });
+	useAlertsStore().addAlert({ message, type: 'warning' })
 }
 
-export { showErrorAlert, showInfoAlert, showSuccessAlert, showWarningAlert };
+export { showErrorAlert, showInfoAlert, showSuccessAlert, showWarningAlert }

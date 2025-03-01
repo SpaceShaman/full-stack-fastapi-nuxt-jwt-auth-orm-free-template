@@ -1,7 +1,7 @@
 <template>
-  <div class="absolute top-1 right-2">
-    <AuthLogoutButton />
-    <ThemeSelector />
-  </div>
-  <slot />
+	<div class="absolute right-2 top-1">
+		<AuthLogoutButton />
+		<ThemeSelector />
+	</div>
+	<slot />
 </template>
