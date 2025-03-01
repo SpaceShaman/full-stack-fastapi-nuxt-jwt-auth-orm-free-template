@@ -1,28 +1,40 @@
 {
-  "name": "nuxt-app",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "dependencies": {
-    "@vee-validate/yup": "^4.15.0",
-    "nuxt": "^3.15.4",
-    "vue": "latest",
-    "vue-router": "latest",
-    "yup": "^1.6.1"
-  },
-  "devDependencies": {
-    "@nuxtjs/color-mode": "^3.5.2",
-    "@nuxtjs/tailwindcss": "^6.13.1",
-    "@pinia/nuxt": "^0.9.0",
-    "@tailwindcss/typography": "^0.5.16",
-    "@vee-validate/nuxt": "^4.15.0",
-    "daisyui": "^4.12.23",
-    "pinia-plugin-persistedstate": "^4.2.0"
-  }
+	"name": "nuxt-app",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"prettier": "prettier --write .",
+		"format": "npm-run-all -p lint:fix prettier"
+	},
+	"dependencies": {
+		"@vee-validate/yup": "^4.15.0",
+		"nuxt": "^3.15.4",
+		"vue": "latest",
+		"vue-router": "latest",
+		"yup": "^1.6.1"
+	},
+	"devDependencies": {
+		"@nuxt/eslint": "^1.1.0",
+		"@nuxtjs/color-mode": "^3.5.2",
+		"@nuxtjs/tailwindcss": "^6.13.1",
+		"@pinia/nuxt": "^0.9.0",
+		"@tailwindcss/typography": "^0.5.16",
+		"@vee-validate/nuxt": "^4.15.0",
+		"daisyui": "^4.12.23",
+		"eslint": "^9.21.0",
+		"eslint-plugin-prettier": "^5.2.3",
+		"npm-run-all": "^4.1.5",
+		"pinia-plugin-persistedstate": "^4.2.0",
+		"prettier": "^3.5.2",
+		"prettier-plugin-organize-imports": "^4.1.0",
+		"prettier-plugin-tailwindcss": "^0.6.11",
+		"typescript": "^5.7.3"
+	}
 }
