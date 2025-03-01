@@ -28,12 +28,14 @@
 
 - ⚡ [**FastAPI**](https://fastapi.tiangolo.com) for the Python backend API.
     - 📦 [**Poetry**](https://python-poetry.org) for dependency management.
+    - 📝 [**Pydantic**](https://docs.pydantic.dev) for data validation.
     - 🗃 [**SQLite**](https://www.sqlite.org) as database.
     - 🆓 **ORM Free**: Use raw SQL queries by leveraging the repository pattern.
     - 🛠 [**SQLift**](https://github.com/SpaceShaman/SQLift) for database migrations.
-    - 🛡 **JWT token** authentication.
 - 🚀 [**Nuxt.js**](https://nuxt.com) for the frontend.
     - 🟦 [**TypeScript**](https://www.typescriptlang.org) for static type checking.
+    - 🖌 [**Prettier**](https://prettier.io) for code formatting.
+    - ✨ [**ESLint**](https://eslint.org) for linting.
     - 🎨 [**TailwindCSS**](https://tailwindcss.com) for styling.
     - 🧩 [**daisyUI**](https://daisyui.com) for ready-to-use [**TailwindCSS**](https://tailwindcss.com) components.
     - 🔐 Middleware for authentication.
