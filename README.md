@@ -29,6 +29,7 @@
 
 - ⚡ [**FastAPI**](https://fastapi.tiangolo.com) for the Python backend API.
     - 📦 [**Poetry**](https://python-poetry.org) for dependency management.
+    - 🐶 [**Ruff**](https://github.com/astral-sh/ruff) for linting.
     - 📝 [**Pydantic**](https://docs.pydantic.dev) for data validation.
     - 🗃 [**SQLite**](https://www.sqlite.org) as database.
     - 🆓 **ORM Free**: Use raw SQL queries by leveraging the repository pattern.
