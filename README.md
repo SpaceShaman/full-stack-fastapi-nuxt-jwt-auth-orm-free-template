@@ -23,6 +23,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-black)](https://github.com/psf/black)
 [![Linting: Ruff](https://img.shields.io/badge/linting-Ruff-black?logo=ruff&logoColor=black)](https://github.com/astral-sh/ruff)
 [![Code formatter: Prettier](https://img.shields.io/badge/code%20formatter-Prettier-ff69b4)](https://prettier.io/)
+[![Linting: ESLint](https://img.shields.io/badge/linting-ESLint-4B32C3)](https://eslint.org/)
 
 ## Technology Stack and Features
 
