@@ -7,7 +7,7 @@
 			default: 'text',
 		},
 		errorMessage: String,
-		disable: {
+		disabled: {
 			type: Boolean,
 			default: false,
 		},
@@ -24,7 +24,7 @@
 			:type="type"
 			class="grow"
 			:placeholder="placeholder"
-			:disabled="disable"
+			:disabled="disabled"
 		/>
 	</label>
 	<div class="label">

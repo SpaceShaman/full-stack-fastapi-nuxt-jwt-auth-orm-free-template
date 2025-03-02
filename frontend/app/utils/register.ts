@@ -21,5 +21,4 @@ export default async function register(
 			}
 		},
 	})
-	await navigateTo('/')
 }
