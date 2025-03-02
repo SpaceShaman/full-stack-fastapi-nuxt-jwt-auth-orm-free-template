@@ -4,11 +4,10 @@
 			type: String,
 			default: 'Username',
 		},
-		errorMessage: String,
 	})
 </script>
 <template>
-	<TextInput :placeholder="placeholder" :error-message="errorMessage">
+	<TextInput :placeholder="placeholder">
 		<template #prepend-icon>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

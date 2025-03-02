@@ -7,6 +7,10 @@
 			default: 'text',
 		},
 		errorMessage: String,
+		disable: {
+			type: Boolean,
+			default: false,
+		},
 	})
 </script>
 <template>
@@ -20,6 +24,7 @@
 			:type="type"
 			class="grow"
 			:placeholder="placeholder"
+			:disabled="disable"
 		/>
 	</label>
 	<div class="label">
