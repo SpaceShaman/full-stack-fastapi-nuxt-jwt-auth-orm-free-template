@@ -1,3 +1,4 @@
 {
-  "python.analysis.extraPaths": ["backend/app", "backend/tests"]
+  "python.analysis.extraPaths": ["backend/app", "backend/tests"],
+  "nuxtr.monorepoMode.DirectoryName": "frontend"
 }
