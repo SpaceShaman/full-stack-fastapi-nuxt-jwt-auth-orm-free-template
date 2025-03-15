@@ -1,11 +1,9 @@
-FROM python:3.12 AS prod
+FROM python:3.12-slim-bookworm AS prod
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 ENV PYTHONPATH="/app"
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 WORKDIR /app
-
-RUN apt update && apt upgrade -y
 
 RUN pip install poetry
 COPY poetry.lock pyproject.toml ./
