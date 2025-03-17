@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -21,3 +23,7 @@ def check_password_strength(password: str) -> bool:
     if all((char.isalnum() for char in password)):
         return False
     return any((char.islower() for char in password))
+
+
+def generate_activation_code() -> str:
+    return str(uuid4())

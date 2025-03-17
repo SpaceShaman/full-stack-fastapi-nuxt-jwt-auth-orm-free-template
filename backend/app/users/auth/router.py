@@ -1,6 +1,7 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Request
+
 from users.dependencies import get_current_user
 from users.schemas import User
 
@@ -10,8 +11,19 @@ from .exceptions import (
     UserAlreadyExists,
     UserIsNotActive,
 )
-from .schemas import ChangePasswordSchema, Credentials, RegistrationSchema, Token
-from .services import ChangePasswordService, LoginService, RegisterService
+from .schemas import (
+    ChangePasswordSchema,
+    Credentials,
+    RecoverPasswordSchema,
+    RegistrationSchema,
+    Token,
+)
+from .services import (
+    ChangePasswordService,
+    LoginService,
+    RecoverPasswordService,
+    RegisterService,
+)
 
 auth_router = APIRouter(tags=["auth"], prefix="/auth")
 
@@ -65,3 +77,11 @@ async def change_password(
     except PasswordIsTooWeak as e:
         raise HTTPException(status_code=401, detail="Password is too weak") from e
     return {"change-password": "success"}
+
+
+@auth_router.post("/recover")
+async def send_recovery_email(
+    request: Request, recover_password: RecoverPasswordSchema
+) -> dict[str, str]:
+    RecoverPasswordService().send_recovery_email(recover_password.email)
+    return {"detail": "Password reset email sent"}

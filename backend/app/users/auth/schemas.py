@@ -20,3 +20,7 @@ class Credentials(BaseModel):
 class ChangePasswordSchema(BaseModel):
     old_password: str
     new_password: str
+
+
+class RecoverPasswordSchema(BaseModel):
+    email: str

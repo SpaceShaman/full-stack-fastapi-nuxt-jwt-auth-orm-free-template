@@ -20,6 +20,9 @@ class UserRepository:
     def get_user_by_username(self, username: str) -> User | None:
         return self._get_user("username = ?", (username,))
 
+    def get_user_by_email(self, email: str) -> User | None:
+        return self._get_user("email = ?", (email,))
+
     def get_user_by_activation_code(self, activation_code: str) -> User | None:
         return self._get_user(
             "activation_code = ?",
