@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends
 
-from .auth.api import auth_router
+from .auth.router import auth_router
 from .dependencies import get_current_user
 from .schemas import User
 

@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from sqlift import up
-from users.api import router
+from users.router import router
 
 
 @asynccontextmanager

@@ -1,7 +1,7 @@
 from typing import Protocol
 
 from .exceptions import UserNotFound
-from .repositorys import UserRepository
+from .repository import UserRepository
 from .schemas import User
 
 

@@ -4,8 +4,8 @@ from uuid import uuid4
 
 import jwt
 from core.settings import SECRET_KEY
-from mail.services import MailService
-from users.repositorys import UserRepository
+from mail.service import MailService
+from users.repository import UserRepository
 from users.schemas import User
 
 from .exceptions import (

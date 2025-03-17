@@ -55,5 +55,5 @@ def mail_spy(mocker) -> Any:
             self.body = body
 
     mail = MailClientSpy()
-    mocker.patch("mail.services.MailClient", return_value=mail)
+    mocker.patch("mail.service.MailClient", return_value=mail)
     yield mail

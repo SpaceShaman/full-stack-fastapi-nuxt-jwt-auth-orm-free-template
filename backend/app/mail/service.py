@@ -3,7 +3,7 @@ from typing import Protocol
 
 from core.settings import BASE_URL
 from jinja2 import Template
-from mail.clients import MailClient
+from mail.client import MailClient
 
 
 class MailClientInterface(Protocol):

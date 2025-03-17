@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 
 from .exceptions import UserNotFound
 from .schemas import User
-from .services import UserService
+from .service import UserService
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
