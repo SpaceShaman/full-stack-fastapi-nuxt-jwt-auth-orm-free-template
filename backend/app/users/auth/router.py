@@ -84,7 +84,7 @@ async def change_password(
 
 @auth_router.post("/recover")
 async def send_recovery_email(
-    request: Request, recover_password: RecoverPasswordSchema
+    recover_password: RecoverPasswordSchema,
 ) -> dict[str, str]:
     try:
         RecoverPasswordService().send_recovery_email(recover_password.email)
@@ -97,7 +97,6 @@ async def send_recovery_email(
 
 @auth_router.post("/recover/{recovery_code}")
 async def set_new_password(
-    request: Request,
     recovery_code: str,
     password: SetNewPasswordSchema,
 ) -> dict[str, str]:
