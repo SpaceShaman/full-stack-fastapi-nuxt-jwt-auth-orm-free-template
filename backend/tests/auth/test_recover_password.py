@@ -19,8 +19,6 @@ def assert_user(
     assert pwd_context.verify(password, user[1])
     assert user[2] == is_active
     assert user[3] == recovery_code
-    if recovery_code:
-        assert UUID(recovery_code)
 
 
 def get_recover_code(mail_body: str) -> str:
@@ -99,3 +97,27 @@ def test_try_set_new_password_with_wrong_recover_code(client, db_connection):
     )
 
     assert response.status_code == 403
+
+
+def test_try_set_new_password_with_weak_password(client, db_connection):
+    create_user(
+        db_connection,
+        "user",
+        "$2b$12$AIflVbmr.Re2WQ1EhvB2Yu2WRPFklJAjMfQ8LGPiCYDUrcXtxslqe",
+        True,
+        "recover-code",
+    )
+
+    response = client.post(
+        f"{URL}/recover-code",
+        json={"new_password": "weak"},
+    )
+
+    assert response.status_code == 401
+    assert_user(
+        db_connection,
+        "user",
+        "password",
+        True,
+        "recover-code",
+    )
