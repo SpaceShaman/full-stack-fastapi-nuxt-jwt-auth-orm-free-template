@@ -6,6 +6,7 @@ from users.dependencies import get_current_user
 from users.schemas import User
 
 from .exceptions import (
+    ActivationCodeNotFound,
     IncorrectUsernameOrPassword,
     PasswordIsTooWeak,
     UserAlreadyExists,
@@ -17,6 +18,7 @@ from .schemas import (
     Credentials,
     RecoverPasswordSchema,
     RegistrationSchema,
+    SetNewPasswordSchema,
     Token,
 )
 from .services import (
@@ -60,7 +62,7 @@ async def register(request: Request, user: RegistrationSchema) -> dict[str, str]
 async def activate(activation_code: str) -> dict[str, str]:
     try:
         RegisterService().activate(activation_code)
-    except Exception as e:
+    except ActivationCodeNotFound as e:
         raise HTTPException(status_code=404, detail="Activation code not found") from e
     return {"activation": "success"}
 
@@ -91,3 +93,18 @@ async def send_recovery_email(
             status_code=403, detail="User with this email does not exist"
         ) from e
     return {"detail": "Password reset email sent"}
+
+
+@auth_router.post("/recover/{recovery_code}")
+async def set_new_password(
+    request: Request,
+    recovery_code: str,
+    password: SetNewPasswordSchema,
+) -> dict[str, str]:
+    try:
+        RecoverPasswordService().set_new_password(recovery_code, password.new_password)
+    except ActivationCodeNotFound as e:
+        raise HTTPException(status_code=403, detail="User not found") from e
+    except PasswordIsTooWeak as e:
+        raise HTTPException(status_code=401, detail="Password is too weak") from e
+    return {"recover": "success"}

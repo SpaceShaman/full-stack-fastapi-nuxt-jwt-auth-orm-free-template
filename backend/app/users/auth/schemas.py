@@ -24,3 +24,7 @@ class ChangePasswordSchema(BaseModel):
 
 class RecoverPasswordSchema(BaseModel):
     email: str
+
+
+class SetNewPasswordSchema(BaseModel):
+    new_password: str

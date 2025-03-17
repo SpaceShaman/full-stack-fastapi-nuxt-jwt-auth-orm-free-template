@@ -119,3 +119,13 @@ class RecoverPasswordService:
         user.activation_code = recovery_code
         self.user_repository.update_user(user)
         self.mail_service.send_recovery_code(email, recovery_code)
+
+    def set_new_password(self, recovery_code: str, new_password: str) -> None:
+        user = self.user_repository.get_user_by_activation_code(recovery_code)
+        if not user:
+            raise ActivationCodeNotFound("Activation code not found")
+        if not check_password_strength(new_password):
+            raise PasswordIsTooWeak("Password is too weak")
+        user.password = generate_password_hash(new_password)
+        user.activation_code = None
+        self.user_repository.update_user(user)

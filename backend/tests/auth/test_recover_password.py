@@ -9,7 +9,7 @@ URL = "users/auth/recover"
 
 
 def assert_user(
-    connection, username: str, password: str, is_active: bool, recovery_code: str
+    connection, username: str, password: str, is_active: bool, recovery_code: str | None
 ):
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
     user = connection.execute(
@@ -49,6 +49,7 @@ def test_send_recover_password(client, db_connection, mail_spy):
         URL,
         json={"email": "test@test.com"},
     )
+
     assert response.status_code == 200
     assert response.json() == {"detail": "Password reset email sent"}
     recover_code = get_recover_code(mail_spy.body)
@@ -63,4 +64,38 @@ def test_try_send_recover_password_for_not_existing_user(
         URL,
         json={"email": "not_existing_user@test.com"},
     )
+
+    assert response.status_code == 403
+
+
+def test_set_new_password_with_recover_code(client, db_connection):
+    create_user(
+        db_connection,
+        "user",
+        "$2b$12$AIflVbmr.Re2WQ1EhvB2Yu2WRPFklJAjMfQ8LGPiCYDUrcXtxslqe",
+        True,
+        "recover-code",
+    )
+
+    response = client.post(
+        f"{URL}/recover-code",
+        json={"new_password": "NewPassw0rd$"},
+    )
+
+    assert response.status_code == 200
+    assert_user(
+        db_connection,
+        "user",
+        "NewPassw0rd$",
+        True,
+        None,
+    )
+
+
+def test_try_set_new_password_with_wrong_recover_code(client, db_connection):
+    response = client.post(
+        f"{URL}/wrong-code",
+        json={"new_password": "NewPassw0rd$"},
+    )
+
     assert response.status_code == 403
