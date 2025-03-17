@@ -6,7 +6,7 @@ def create_user(
     username: str,
     hashed_password: str,
     is_active: bool = False,
-    activation_code: str = "94121a26-91c5-4303-b456-654818926474",
+    activation_code: str | None = "94121a26-91c5-4303-b456-654818926474",
     email: str = "test@test.com",
 ):
     connection.execute(

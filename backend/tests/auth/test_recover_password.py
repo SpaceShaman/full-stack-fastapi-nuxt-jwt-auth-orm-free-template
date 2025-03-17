@@ -121,3 +121,11 @@ def test_try_set_new_password_with_weak_password(client, db_connection):
         True,
         "recover-code",
     )
+
+
+def test_try_set_new_password_with_empty_recover_code(client, db_connection):
+    response = client.post(
+        f"{URL}/",
+        json={"new_password": "NewPassw0rd$"},
+    )
+    assert response.status_code == 422
