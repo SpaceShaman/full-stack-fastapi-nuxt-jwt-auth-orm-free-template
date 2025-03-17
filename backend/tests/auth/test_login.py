@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 import jwt
 import pytest
 
-URL = "/auth/login"
+URL = "/users/auth/login"
 
 
 def _create_user(

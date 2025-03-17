@@ -1,9 +1,8 @@
 from contextlib import asynccontextmanager
 
-from auth.api import auth_router
 from fastapi import FastAPI
 from sqlift import up
-from users.api import users_router
+from users.api import router
 
 
 @asynccontextmanager
@@ -13,8 +12,7 @@ async def migrate(app):
 
 app = FastAPI(lifespan=migrate, root_path="/api")
 
-app.include_router(auth_router)
-app.include_router(users_router)
+app.include_router(router)
 
 
 if __name__ == "__main__":

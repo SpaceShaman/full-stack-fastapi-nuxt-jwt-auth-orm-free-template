@@ -13,7 +13,7 @@ from .exceptions import (
 from .schemas import ChangePasswordSchema, Credentials, RegistrationSchema, Token
 from .services import ChangePasswordService, LoginService, RegisterService
 
-auth_router = APIRouter(prefix="/auth", tags=["auth"])
+auth_router = APIRouter(tags=["auth"], prefix="/auth")
 
 
 @auth_router.post("/login")

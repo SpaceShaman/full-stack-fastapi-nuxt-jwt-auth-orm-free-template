@@ -3,6 +3,8 @@ from uuid import UUID
 
 from passlib.context import CryptContext
 
+URL = "/users/auth/register"
+
 
 def _create_user(
     connection,
@@ -49,7 +51,7 @@ def assert_mail(mail_spy, recipient: str):
 
 def test_register_new_user(client, db_connection, mail_spy):
     response = client.post(
-        "/auth/register",
+        URL,
         json={
             "username": "new-user",
             "password": "Passw0rd$",
@@ -76,7 +78,7 @@ def test_try_register_existing_user(client, db_connection):
     )
 
     response = client.post(
-        "/auth/register",
+        URL,
         json={
             "username": "new-user",
             "password": "Passw0rd$",
@@ -96,7 +98,7 @@ def test_try_register_user_with_existing_email(client, db_connection):
     )
 
     response = client.post(
-        "/auth/register",
+        URL,
         json={
             "username": "another-user",
             "password": "Passw0rd$",
@@ -109,7 +111,7 @@ def test_try_register_user_with_existing_email(client, db_connection):
 
 def test_try_register_user_with_weak_password(client, db_connection):
     response = client.post(
-        "/auth/register",
+        URL,
         json={"username": "new-user", "password": "password", "email": "test@test.com"},
     )
 
@@ -118,7 +120,7 @@ def test_try_register_user_with_weak_password(client, db_connection):
 
 def test_try_register_user_with_short_password(client, db_connection):
     response = client.post(
-        "/auth/register",
+        URL,
         json={"username": "new-user", "password": "Pass0D$", "email": "test@test.com"},
     )
 
@@ -127,7 +129,7 @@ def test_try_register_user_with_short_password(client, db_connection):
 
 def test_try_register_user_with_no_number_in_password(client, db_connection):
     response = client.post(
-        "/auth/register",
+        URL,
         json={
             "username": "new-user",
             "password": "Password$",
@@ -140,7 +142,7 @@ def test_try_register_user_with_no_number_in_password(client, db_connection):
 
 def test_try_register_user_with_no_uppercase_in_password(client, db_connection):
     response = client.post(
-        "/auth/register",
+        URL,
         json={
             "username": "new-user",
             "password": "passw0rd$",
@@ -153,7 +155,7 @@ def test_try_register_user_with_no_uppercase_in_password(client, db_connection):
 
 def test_try_register_user_with_no_special_char_in_password(client, db_connection):
     response = client.post(
-        "/auth/register",
+        URL,
         json={"username": "new-user", "password": "Passw0rd", "email": "test@test.com"},
     )
 
@@ -169,13 +171,13 @@ def test_activate_registered_user(client, db_connection):
         "94121a26-91c5-4303-b456-654818926474",
     )
 
-    response = client.get("/auth/activate/94121a26-91c5-4303-b456-654818926474")
+    response = client.get("/users/auth/activate/94121a26-91c5-4303-b456-654818926474")
 
     assert response.status_code == 200
     assert_user(db_connection, "new-user", "password", True, "test@test.com")
 
 
 def test_try_activate_not_existing_user(client, db_connection):
-    response = client.get("/auth/activate/94121a26-91c5-4303-b456-654818926474")
+    response = client.get("/users/auth/activate/94121a26-91c5-4303-b456-654818926474")
 
     assert response.status_code == 404
