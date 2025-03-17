@@ -3,21 +3,9 @@ from uuid import UUID
 
 from passlib.context import CryptContext
 
+from tests.utils import create_user
+
 URL = "/users/auth/register"
-
-
-def _create_user(
-    connection,
-    username: str,
-    hashed_password: str,
-    is_active: bool = False,
-    activation_code: str = "94121a26-91c5-4303-b456-654818926474",
-    email: str = "test@test.com",
-):
-    connection.execute(
-        f"INSERT INTO users (username, password, is_active, activation_code, email) VALUES ('{username}', '{hashed_password}', {is_active}, '{activation_code}', '{email}')"
-    )
-    connection.commit()
 
 
 def assert_user(
@@ -71,7 +59,7 @@ def test_register_new_user(client, db_connection, mail_spy):
 
 
 def test_try_register_existing_user(client, db_connection):
-    _create_user(
+    create_user(
         db_connection,
         "new-user",
         "xxxx",
@@ -90,7 +78,7 @@ def test_try_register_existing_user(client, db_connection):
 
 
 def test_try_register_user_with_existing_email(client, db_connection):
-    _create_user(
+    create_user(
         db_connection,
         "new-user",
         "xxxx",
@@ -163,7 +151,7 @@ def test_try_register_user_with_no_special_char_in_password(client, db_connectio
 
 
 def test_activate_registered_user(client, db_connection):
-    _create_user(
+    create_user(
         db_connection,
         "new-user",
         "$2b$12$AIflVbmr.Re2WQ1EhvB2Yu2WRPFklJAjMfQ8LGPiCYDUrcXtxslqe",
