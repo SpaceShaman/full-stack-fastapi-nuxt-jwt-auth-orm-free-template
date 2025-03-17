@@ -10,6 +10,7 @@ from .exceptions import (
     PasswordIsTooWeak,
     UserAlreadyExists,
     UserIsNotActive,
+    UserNotFound,
 )
 from .schemas import (
     ChangePasswordSchema,
@@ -83,5 +84,10 @@ async def change_password(
 async def send_recovery_email(
     request: Request, recover_password: RecoverPasswordSchema
 ) -> dict[str, str]:
-    RecoverPasswordService().send_recovery_email(recover_password.email)
+    try:
+        RecoverPasswordService().send_recovery_email(recover_password.email)
+    except UserNotFound as e:
+        raise HTTPException(
+            status_code=403, detail="User with this email does not exist"
+        ) from e
     return {"detail": "Password reset email sent"}

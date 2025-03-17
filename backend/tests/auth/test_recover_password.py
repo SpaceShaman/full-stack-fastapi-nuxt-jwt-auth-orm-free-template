@@ -54,3 +54,13 @@ def test_send_recover_password(client, db_connection, mail_spy):
     recover_code = get_recover_code(mail_spy.body)
     assert_user(db_connection, "user", "password", True, recover_code)
     assert_mail(mail_spy, "test@test.com")
+
+
+def test_try_send_recover_password_for_not_existing_user(
+    client, db_connection, mail_spy
+):
+    response = client.post(
+        URL,
+        json={"email": "not_existing_user@test.com"},
+    )
+    assert response.status_code == 403
