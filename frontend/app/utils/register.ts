@@ -3,7 +3,7 @@ export default async function register(
 	email: string,
 	password: string
 ) {
-	await useNuxtApp().$api('/auth/register', {
+	await useNuxtApp().$api('/users/auth/register', {
 		method: 'POST',
 		body: { username, email, password },
 		onResponse: ({ response }) => {

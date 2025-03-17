@@ -1,10 +1,10 @@
-export default async function changePassword(
-	oldPassword: string,
+export default async function recoverPassword(
+	code: string,
 	newPassword: string
 ) {
-	await useNuxtApp().$api('/users/auth/change-password', {
+	await useNuxtApp().$api(`/users/auth/recover/${code}`, {
 		method: 'POST',
-		body: { old_password: oldPassword, new_password: newPassword },
+		body: { new_password: newPassword },
 		onResponse: ({ response }) => {
 			if (response.ok) {
 				showSuccessAlert('Password changed successfully')

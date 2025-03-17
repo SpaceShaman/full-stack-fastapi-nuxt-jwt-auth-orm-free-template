@@ -1,5 +1,5 @@
 export default async function forgotPassword(email: string) {
-	await useNuxtApp().$api<{ token: string }>('/auth/forgot-password', {
+	await useNuxtApp().$api<{ token: string }>('/users/auth/recover', {
 		method: 'POST',
 		body: { email },
 		onResponse: ({ response }) => {
@@ -8,7 +8,7 @@ export default async function forgotPassword(email: string) {
 			}
 		},
 		onResponseError: ({ response }) => {
-			if (response.status === 404) {
+			if (response.status === 403) {
 				showErrorAlert('Email not found')
 			}
 		},
