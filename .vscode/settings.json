@@ -1,5 +1,7 @@
 {
   "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.cwd": "${workspaceFolder}/backend/tests",
   "python.analysis.extraPaths": ["backend/app", "backend/tests"],
   "nuxtr.monorepoMode.DirectoryName": "frontend"
 }
