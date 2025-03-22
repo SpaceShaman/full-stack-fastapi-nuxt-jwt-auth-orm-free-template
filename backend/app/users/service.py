@@ -7,6 +7,7 @@ from .schemas import User
 
 class UserRepositoryInterface(Protocol):
     def get_user_by_username(self, username) -> User | None: ...
+    def get_users(self) -> list[User]: ...
 
 
 class UserService:
@@ -18,3 +19,6 @@ class UserService:
             return user
         else:
             raise UserNotFound(f"User {username} not found")
+
+    def get_users(self) -> list[User]:
+        return self.repository.get_users()

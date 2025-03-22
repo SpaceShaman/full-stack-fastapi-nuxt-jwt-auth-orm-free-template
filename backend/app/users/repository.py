@@ -29,6 +29,15 @@ class UserRepository:
             (activation_code,),
         )
 
+    def get_users(self) -> list[User]:
+        with db_connect() as connection:
+            cursor = connection.execute("SELECT username, email, is_active FROM users")
+            users = cursor.fetchall()
+            return [
+                User(username=user[0], email=user[1], is_active=user[2])
+                for user in users
+            ]
+
     def _get_user(self, where: str, parms: tuple) -> User | None:
         with db_connect() as connection:
             cursor = connection.execute(
