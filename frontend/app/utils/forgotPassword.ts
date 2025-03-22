@@ -1,5 +1,5 @@
 export default async function forgotPassword(email: string) {
-	await useNuxtApp().$api<{ token: string }>('/users/auth/recover', {
+	await useNuxtApp().$api<{ token: string }>('/auth/recover', {
 		method: 'POST',
 		body: { email },
 		onResponse: ({ response }) => {

@@ -1,5 +1,5 @@
 export default async function activateAccount(activationCode: string) {
-	await useNuxtApp().$api(`/users/auth/activate/${activationCode}`, {
+	await useNuxtApp().$api(`/auth/activate/${activationCode}`, {
 		method: 'GET',
 		onResponse: ({ response }) => {
 			if (response.ok) {

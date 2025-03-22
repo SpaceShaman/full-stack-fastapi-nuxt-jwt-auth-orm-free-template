@@ -5,7 +5,7 @@ from passlib.context import CryptContext
 
 from tests.utils import create_user
 
-URL = "users/auth/recover"
+URL = "auth/recover"
 
 
 def assert_user(

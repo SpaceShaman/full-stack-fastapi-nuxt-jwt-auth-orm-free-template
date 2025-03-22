@@ -1,7 +1,7 @@
 import pytest
 from passlib.context import CryptContext
 
-URL = "/users/auth/change-password"
+URL = "/auth/change-password"
 
 
 def create_user(

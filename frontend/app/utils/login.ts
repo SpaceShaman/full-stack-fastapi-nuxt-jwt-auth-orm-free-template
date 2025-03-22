@@ -1,5 +1,5 @@
 export default async function login(username: string, password: string) {
-	await useNuxtApp().$api<{ token: string }>('/users/auth/login', {
+	await useNuxtApp().$api<{ token: string }>('/auth/login', {
 		method: 'POST',
 		body: { username, password },
 		onResponse: ({ response }) => {

@@ -2,7 +2,7 @@ export default async function changePassword(
 	oldPassword: string,
 	newPassword: string
 ) {
-	await useNuxtApp().$api('/users/auth/change-password', {
+	await useNuxtApp().$api('/auth/change-password', {
 		method: 'POST',
 		body: { old_password: oldPassword, new_password: newPassword },
 		onResponse: ({ response }) => {

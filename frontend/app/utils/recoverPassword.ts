@@ -2,7 +2,7 @@ export default async function recoverPassword(
 	code: string,
 	newPassword: string
 ) {
-	await useNuxtApp().$api(`/users/auth/recover/${code}`, {
+	await useNuxtApp().$api(`/auth/recover/${code}`, {
 		method: 'POST',
 		body: { new_password: newPassword },
 		onResponse: ({ response }) => {
