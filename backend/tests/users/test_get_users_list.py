@@ -32,7 +32,7 @@ def setup_db(db_connection):
     )
 
 
-def test_get_users_list(logged_client, db_connection):
+def test_get_users_list(logged_client):
     response = logged_client.get(URL)
 
     assert response.status_code == 200
@@ -54,3 +54,10 @@ def test_get_users_list(logged_client, db_connection):
             "email": "user_2@test.com",
         },
     ]
+
+
+def test_try_get_users_list_without_auth(client):
+    response = client.get(URL)
+
+    assert response.status_code == 401
+    assert response.json() == {"detail": "Not authenticated"}
