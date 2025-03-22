@@ -49,8 +49,7 @@ def mail_spy(mocker) -> Any:
             self.recipients = None
             self.message = None
 
-        def login(self, user, password):
-            pass
+        def login(self, user, password): ...
 
         def sendmail(self, from_addr, to_addrs, msg):
             self.from_address = from_addr
@@ -60,14 +59,12 @@ def mail_spy(mocker) -> Any:
     mail = SMTPSpy()
 
     class ContextManager:
-        def __init__(self, *args, **kwargs):
-            pass
+        def __init__(self, *args, **kwargs): ...
 
         def __enter__(self):
             return mail
 
-        def __exit__(self, *args):
-            pass
+        def __exit__(self, *args): ...
 
     mocker.patch("mail.client.SMTP_SSL", return_value=ContextManager())
     yield mail
