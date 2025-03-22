@@ -41,7 +41,8 @@ const forgotPasswordSchema = yup.object().shape({
 })
 
 const recoverPasswordSchema = yup.object().shape({
-	newPassword: passwordValidator,
+	password: passwordValidator,
+	passwordConfirmation: passwordConfirmationValidator,
 })
 
 const changePasswordSchema = yup.object().shape({

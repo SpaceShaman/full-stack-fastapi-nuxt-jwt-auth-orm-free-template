@@ -8,12 +8,13 @@
 
 	const loading = ref(false)
 
-	const [newPassword] = defineField('newPassword')
+	const [password] = defineField('password')
+	const [passwordConfirmation] = defineField('passwordConfirmation')
 
 	const submit = handleSubmit(async (value) => {
 		loading.value = true
 		try {
-			await recoverPassword(code, value.newPassword)
+			await recoverPassword(code, value.password)
 		} finally {
 			loading.value = false
 		}
@@ -23,9 +24,15 @@
 	<form class="card-body" @submit.prevent="submit">
 		<div class="form-control">
 			<PasswordInput
-				v-model="newPassword"
-				:error-message="errors.newPassword"
+				v-model="password"
+				:error-message="errors.password"
 				placeholder="New Password"
+				:disabled="loading"
+			/>
+			<PasswordInput
+				v-model="passwordConfirmation"
+				:error-message="errors.passwordConfirmation"
+				placeholder="Password confirmation"
 				:disabled="loading"
 			/>
 		</div>
