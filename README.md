@@ -44,10 +44,10 @@
     - 📝 Form validation via [**VeeValidate**](https://vee-validate.logaretm.com) and [**Yup**](https://yup-docs.vercel.app/)
     - 🎨 Theme selector with 32 themes from [**daisyUI**](https://daisyui.com).
     - 🚨 Alerts and toasts via simple utility functions.
-        - ❌ Call `showErrorMessage('message')` to show an error message.
-        - ✅ Call `showSuccessMessage('message')` to show a success message.
-        - 💡 Call `showInfoMessage('message')` to show an info message.
-        - ⚠️ Call `showWarningMessage('message')` to show a warning message.
+        - ❌ Call `showErrorAlert('message')` to show an error message.
+        - ✅ Call `showSuccessAlert('message')` to show a success message.
+        - 💡 Call `showInfoAlert('message')` to show an info message.
+        - ⚠️ Call `showWarningAlert('message')` to show a warning message.
 - 🔑 **JWT** (JSON Web Token) authentication.
 - 📝 Registration with email based account activation.
 - 🔒 Secure password hashing.

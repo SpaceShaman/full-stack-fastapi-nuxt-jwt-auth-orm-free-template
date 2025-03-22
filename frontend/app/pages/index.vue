@@ -1,7 +1,6 @@
 <template>
 	<Hero>
-		<Article>
-			<AuthChangePasswordForm />
-		</Article>
+		<AuthChangePasswordForm />
+		<UsersList />
 	</Hero>
 </template>
