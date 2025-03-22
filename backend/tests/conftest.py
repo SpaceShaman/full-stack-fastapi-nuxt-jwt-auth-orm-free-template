@@ -43,17 +43,31 @@ def logged_client(client: TestClient) -> TestClient:
 
 @pytest.fixture
 def mail_spy(mocker) -> Any:
-    class MailClientSpy:
+    class SMTPSpy:
         def __init__(self):
-            self.recipient = None
-            self.subject = None
-            self.body = None
+            self.from_address = None
+            self.recipients = None
+            self.message = None
 
-        def send_mail(self, recipients: list[str], subject: str, body: str) -> None:
-            self.recipients = recipients
-            self.subject = subject
-            self.body = body
+        def login(self, user, password):
+            pass
 
-    mail = MailClientSpy()
-    mocker.patch("mail.service.MailClient", return_value=mail)
+        def sendmail(self, from_addr, to_addrs, msg):
+            self.from_address = from_addr
+            self.recipients = to_addrs
+            self.message = msg
+
+    mail = SMTPSpy()
+
+    class ContextManager:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        def __enter__(self):
+            return mail
+
+        def __exit__(self, *args):
+            pass
+
+    mocker.patch("mail.client.SMTP_SSL", return_value=ContextManager())
     yield mail

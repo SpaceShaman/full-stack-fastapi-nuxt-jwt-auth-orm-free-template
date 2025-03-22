@@ -21,16 +21,16 @@ def assert_user(
     assert user[3] == recovery_code
 
 
-def get_recover_code(mail_body: str) -> str:
-    if recover_code := re.search('/recover/(.*)"', mail_body):
+def get_recover_code(message: str) -> str:
+    if recover_code := re.search('/recover/(.*)"', message):
         return recover_code[1]
     return ""
 
 
 def assert_mail(mail_spy, recipient: str):
-    recover_code = get_recover_code(mail_spy.body)
+    recover_code = get_recover_code(mail_spy.message)
     assert mail_spy.recipients[0] == recipient
-    assert mail_spy.subject == "Recover your password"
+    assert "Subject: Recover your password" in mail_spy.message
     assert UUID(recover_code)
 
 
@@ -50,7 +50,7 @@ def test_send_recover_password(client, db_connection, mail_spy):
 
     assert response.status_code == 200
     assert response.json() == {"detail": "Password reset email sent"}
-    recover_code = get_recover_code(mail_spy.body)
+    recover_code = get_recover_code(mail_spy.message)
     assert_user(db_connection, "user", "password", True, recover_code)
     assert_mail(mail_spy, "test@test.com")
 

@@ -1,2 +1,0 @@
-class SMTPEnvError(Exception):
-    pass

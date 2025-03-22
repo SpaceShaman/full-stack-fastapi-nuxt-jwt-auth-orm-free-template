@@ -29,11 +29,16 @@ def assert_user(
         assert UUID(user[4])
 
 
+def get_activation_code(message: str) -> str:
+    if activation_code := re.search('/activate/(.*)"', message):
+        return activation_code[1]
+    return ""
+
+
 def assert_mail(mail_spy, recipient: str):
-    if activation_code := re.search('/activate/(.*)"', mail_spy.body):
-        activation_code = activation_code[1]
+    activation_code = get_activation_code(mail_spy.message)
     assert mail_spy.recipients[0] == recipient
-    assert mail_spy.subject == "Activate your account"
+    assert "Subject: Activate your account" in mail_spy.message
     assert UUID(activation_code)
 
 

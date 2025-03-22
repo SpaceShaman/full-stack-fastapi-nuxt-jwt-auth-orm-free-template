@@ -79,9 +79,9 @@ class RegisterService:
             self.user_repository.create_user(
                 username, hashed_password, email, activation_code
             )
-            self.mail_service.send_activation_code(email, activation_code)
         except Exception as e:
             raise UserAlreadyExists("User already exists") from e
+        self.mail_service.send_activation_code(email, activation_code)
 
     def activate(self, activation_code: str) -> None:
         user = self.user_repository.get_user_by_activation_code(activation_code)

@@ -5,8 +5,6 @@ from smtplib import SMTP_SSL
 
 from core.settings import SMTP_HOST, SMTP_PASSWORD, SMTP_PORT, SMTP_USER
 
-from .exceptions import SMTPEnvError
-
 
 class MailClient:
     def send_mail(self, recipients: list[str], subject: str, body: str) -> None:
@@ -25,13 +23,6 @@ class MailClient:
 
 @contextmanager
 def _create_smtp_connection():
-    if (
-        SMTP_HOST is None
-        or SMTP_PORT is None
-        or SMTP_USER is None
-        or SMTP_PASSWORD is None
-    ):
-        raise SMTPEnvError("SMTP environment variables not set")
     with SMTP_SSL(SMTP_HOST, SMTP_PORT) as smtp:
         smtp.login(SMTP_USER, SMTP_PASSWORD)
         yield smtp
