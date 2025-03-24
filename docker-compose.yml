@@ -14,7 +14,7 @@ services:
       - .env
     volumes:
       - type: bind
-        source: ./db.sqlite
+        source: ./backend/app/db.sqlite
         target: /app/db.sqlite
     restart: unless-stopped
     command: >
