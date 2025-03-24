@@ -1,0 +1,20 @@
+name: Deploy to Production
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull newest version of application and build
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd full-stack-fastapi-nuxt-jwt-auth-orm-free-template
+            git pull origin master
+            docker-compose -f docker-compose.prod.yml up -d --build
