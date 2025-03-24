@@ -5,9 +5,7 @@ services:
       target: prod
     container_name: backend
     labels:
-      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
-      - "traefik.http.middlewares.backend-strip-prefix.stripprefix.prefixes=/api"
-      - "traefik.http.routers.backend.middlewares=backend-strip-prefix"
+      - "traefik.http.routers.backend.rule=PathPrefixStrip: /api"
     env_file:
       - .env
     ports:
