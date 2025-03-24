@@ -12,6 +12,10 @@ services:
       - "traefik.http.services.backend.loadbalancer.server.port=8000"
     env_file:
       - .env
+    volumes:
+      - type: bind
+        source: ./db.sqlite
+        target: /app/db.sqlite
     restart: unless-stopped
     command: >
       sh -c "sqlift up --path database/migrations &&
@@ -56,4 +60,3 @@ services:
 
 volumes:
   letsencrypt:
-    
