@@ -1,0 +1,29 @@
+name: Tests
+on: [workflow_call, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v2
+      - name: Setup a local virtual environment
+        working-directory: ./backend
+        run: |
+          poetry config virtualenvs.create true --local
+          poetry config virtualenvs.in-project true --local
+      - uses: actions/cache@v3
+        name: Define a cache for the virtual environment based on the dependencies lock file
+        with:
+          path: ./backend/.venv
+          key: venv-${{ hashFiles('backend/poetry.lock') }}
+      - name: Install dependencies
+        working-directory: ./backend
+        run: poetry install --all-extras
+      - name: Run tests
+        working-directory: ./backend
+        run: poetry run pytest

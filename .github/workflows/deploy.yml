@@ -4,6 +4,8 @@ on:
     branches:
       - master
 jobs:
+  tests:
+    uses: ./.github/workflows/tests.yml
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
