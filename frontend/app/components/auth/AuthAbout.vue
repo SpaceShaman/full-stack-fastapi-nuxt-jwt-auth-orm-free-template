@@ -2,18 +2,19 @@
 	<Article>
 		<h1>Hello, Earthlings 🧑‍🚀</h1>
 		<p>
-			I'm a full stack developer living in the milky way, focused much more on
-			the backend. I love designing IT systems based on clean architecture. My
-			native language is Python and my favorite technologies include Django,
-			Django Ninja, Pydantic, Celery, FastAPI, Transformers, Marvin, Pytest,
-			Factory Boy, Docker, Docker Compose, and I also love creating user
-			interfaces using Nuxt.js. I try to stay up to date with all technological
-			innovations and use the latest technologies to facilitate work. I am also
-			a fan of TDD and DDD methodologies.
+			This is a ORM Free Full Stack, modern web application template. Using
+			FastAPI, Nuxt.js, JWT Authentication, SQLite, Docker compose and more.
 		</p>
 		<p>
-			You can find the source code and more interesting projects on my github
-			<a href="https://github.com/SpaceShaman">github.com/SpaceShaman</a>
+			Check out the source code on GitHub:
+			<a
+				href="https://github.com/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				GitHub Repository
+			</a>
+			.
 		</p>
 	</Article>
 </template>
