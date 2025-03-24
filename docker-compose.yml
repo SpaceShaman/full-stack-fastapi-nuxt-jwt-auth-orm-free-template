@@ -17,7 +17,7 @@ services:
       target: prod
     container_name: frontend
     labels:
-      - "traefik.http.routers.frontend.rule=Host(`${BASE_URL}`)"
+      - "traefik.http.routers.frontend.rule=Host(`test.spaceshaman.me`)"
     env_file:
       - .env
     restart: unless-stopped
@@ -25,7 +25,6 @@ services:
   proxy:
     image: traefik:v3.3
     command:
-      - "--api.insecure=true"
       - "--providers.docker"
     ports:
       - "80:80"
