@@ -4,8 +4,12 @@ services:
       context: backend
       target: prod
     container_name: backend
+    labels:
+      - "traefik.http.routers.backend.rule=Host(`${BASE_URL}/api`)"
     env_file:
       - .env
+    ports:
+      - "8000:8000"
     restart: unless-stopped
     command: >
       sh -c "sqlift up --path database/migrations &&
