@@ -5,7 +5,9 @@ services:
       target: prod
     container_name: backend
     labels:
-      - "traefik.http.routers.backend.rule=Host(`${BASE_URL}/api`)"
+      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
+      - "traefik.http.middlewares.backend-strip-prefix.stripprefix.prefixes=/api"
+      - "traefik.http.routers.backend.middlewares=backend-strip-prefix"
     env_file:
       - .env
     ports:
@@ -33,6 +35,7 @@ services:
     command:
       - "--api.insecure=true"
       - "--providers.docker"
+      - "--entrypoints.web.address=:80"
     ports:
       - "80:80"
       - "8080:8080"
