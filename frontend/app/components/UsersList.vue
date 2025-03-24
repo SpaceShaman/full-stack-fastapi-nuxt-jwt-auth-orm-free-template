@@ -11,7 +11,6 @@
 			showErrorAlert('Failed to fetch users list')
 		},
 	})
-	console.log(users)
 </script>
 <template>
 	<div

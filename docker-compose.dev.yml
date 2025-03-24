@@ -24,11 +24,6 @@ services:
     ports:
       - 3000:3000
 
-  proxy:
-    extends:
-      file: docker-compose.yml
-      service: proxy
-
 networks:
   proxy:
     driver: bridge
