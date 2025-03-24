@@ -87,6 +87,14 @@
 
 ![Validation](img/validation.png)
 
+### Simple Dashboard
+
+![Dashboard](img/dashboard.png)
+
+### Activation Email
+
+![Activation Email](img/activation-email.png)
+
 ## How To Use It
 
 You can **just fork or clone** this repository and use it as is.
