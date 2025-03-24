@@ -154,7 +154,7 @@ USERNAME        # Your SSH username
 
 ### Comunication between FastAPI and Nuxt.js
 
-The communication between FastAPI and Nuxt.js is done via plugin `api' which is located in [frontend/plugins/api.ts](frontend/plugins/api.ts).
+The communication between FastAPI and Nuxt.js is done via plugin `api' which is located in [frontend/app/plugins/api.ts](frontend/app/plugins/api.ts).
 This plugin uses the [$fetch](https://nuxt.com/docs/getting-started/data-fetching) to make requests to the FastAPI backend.
 You can use this plugin in two ways:
 
