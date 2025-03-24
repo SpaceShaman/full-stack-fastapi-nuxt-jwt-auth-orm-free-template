@@ -20,6 +20,8 @@ services:
       - "traefik.http.routers.frontend.rule=Host(`test.spaceshaman.me`)"
     env_file:
       - .env
+    ports:
+      - "3000:3000"
     restart: unless-stopped
 
   proxy:
