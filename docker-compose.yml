@@ -7,8 +7,6 @@ services:
     env_file:
       - .env
     restart: unless-stopped
-    networks:
-      - proxy
     command: >
       sh -c "sqlift up --path database/migrations &&
               uvicorn main:app --host 0.0.0.0 --port 8000"
@@ -18,11 +16,11 @@ services:
       context: frontend
       target: prod
     container_name: frontend
+    labels:
+      - "traefik.http.routers.frontend.rule=Host(`${BASE_URL}`)"
     env_file:
       - .env
     restart: unless-stopped
-    networks:
-      - proxy
 
   proxy:
     image: traefik:v3.3
@@ -34,7 +32,3 @@ services:
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-
-networks:
-  proxy:
-    driver: bridge
