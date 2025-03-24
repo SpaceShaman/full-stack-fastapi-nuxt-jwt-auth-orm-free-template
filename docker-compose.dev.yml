@@ -7,8 +7,6 @@ services:
       target: dev
     volumes:
       - ./backend/app:/app
-    ports:
-      - 8000:8000
     command: >
       sh -c "sqlift up --path database/migrations &&
               uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
@@ -21,9 +19,3 @@ services:
       target: dev
     volumes:
       - ./frontend:/app
-    ports:
-      - 3000:3000
-
-networks:
-  proxy:
-    driver: bridge
