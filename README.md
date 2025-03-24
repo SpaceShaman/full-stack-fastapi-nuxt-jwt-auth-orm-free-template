@@ -1,7 +1,7 @@
 # Full Stack FastAPI Nuxt.js JWT Auth ORM Free Template
 
 [![GitHub License](https://img.shields.io/github/license/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template)](https://github.com/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template?tab=MIT-1-ov-file)
-[![Tests](https://img.shields.io/github/actions/workflow/status/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template/release.yml?label=tests)](https://github.com/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template/blob/master/.github/workflows/tests.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template/deploy.yml?label=tests)](https://github.com/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template/blob/master/.github/workflows/tests.yml)
 [![Codecov](https://img.shields.io/codecov/c/github/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template)](https://codecov.io/gh/SpaceShaman/full-stack-fastapi-nuxt-jwt-auth-orm-free-template)
 [![Python](https://img.shields.io/badge/language-Python-yellow?logo=python&logoColor=yellow)](https://www.python.org/)
 [![TypeScript](https://img.shields.io/badge/language-TypeScript-yellow?logo=typescript&logoColor=yellow)](https://www.typescriptlang.org/)
@@ -56,6 +56,11 @@
 - ✉️ Jinja templates for email messages.
 - ✅ Tests with [Pytest](https://pytest.org).
 - 🚢 Deployment instructions using Docker Compose.
+- 🔄 **CI/CD** with GitHub Actions
+    - 🧪 Automated testing before deployment
+    - 📊 Code coverage reporting with Codecov
+    - 🚀 Continuous integration and deployment pipeline
+    - 📦 Ready-to-use workflow configurations in `.github/workflows/`
 
 ### Login Page
 
@@ -111,6 +116,43 @@ docker-compose -f docker-compose.dev.yml up
 
 ```bash
 docker-compose up
+```
+
+### CI/CD
+
+This project has a CI/CD pipeline with GitHub Actions.
+You can see the workflow configuration in [.github/workflows/](.github/workflows/).
+To use it, you need to set the following secrets in your repository settings:
+
+```bash
+CODECOV_TOKEN   # Your Codecov token
+HOST            # Your SSH host
+SSH_KEY         # Your SSH private key
+USERNAME        # Your SSH username
+```
+
+### Comunication between FastAPI and Nuxt.js
+
+The communication between FastAPI and Nuxt.js is done via plugin `api' which is located in [frontend/plugins/api.ts](frontend/plugins/api.ts).
+This plugin uses the [$fetch](https://nuxt.com/docs/getting-started/data-fetching) to make requests to the FastAPI backend.
+You can use this plugin in two ways:
+
+#### Like useFetch
+
+```typescript
+const { data: users } = await useAPI<User[]>('/users', {
+    method: 'get',
+    ...
+})
+```
+
+#### Like $fetch
+
+```typescript
+await useNuxtApp().$api<{ token: string }>('/auth/login', {
+    method: 'POST',
+    ...
+})
 ```
 
 ## License
