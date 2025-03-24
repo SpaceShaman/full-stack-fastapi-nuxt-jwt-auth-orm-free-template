@@ -27,41 +27,53 @@
 
 ## Technology Stack and Features
 
-- ⚡ [**FastAPI**](https://fastapi.tiangolo.com) for the Python backend API.
-    - 📦 [**Poetry**](https://python-poetry.org) for dependency management.
-    - 🐶 [**Ruff**](https://github.com/astral-sh/ruff) for linting.
-    - 📝 [**Pydantic**](https://docs.pydantic.dev) for data validation.
-    - 🗃 [**SQLite**](https://www.sqlite.org) as database.
-    - 🆓 **ORM Free**: Use raw SQL queries by leveraging the repository pattern.
-    - 🛠 [**SQLift**](https://github.com/SpaceShaman/SQLift) for database migrations.
-- 🚀 [**Nuxt.js**](https://nuxt.com) for the frontend.
-    - 🟦 [**TypeScript**](https://www.typescriptlang.org) for static type checking.
-    - 🖌 [**Prettier**](https://prettier.io) for code formatting.
-    - ✨ [**ESLint**](https://eslint.org) for linting.
-    - 🎨 [**TailwindCSS**](https://tailwindcss.com) for styling.
-    - 🧩 [**daisyUI**](https://daisyui.com) for ready-to-use [**TailwindCSS**](https://tailwindcss.com) components.
-    - 🔐 Middleware for authentication.
-    - 📝 Form validation via [**VeeValidate**](https://vee-validate.logaretm.com) and [**Yup**](https://yup-docs.vercel.app/)
-    - 🎨 Theme selector with 32 themes from [**daisyUI**](https://daisyui.com).
-    - 🚨 Alerts and toasts via simple utility functions.
-        - ❌ Call `showErrorAlert('message')` to show an error message.
-        - ✅ Call `showSuccessAlert('message')` to show a success message.
-        - 💡 Call `showInfoAlert('message')` to show an info message.
-        - ⚠️ Call `showWarningAlert('message')` to show a warning message.
+### Backend
+
+- ⚡ [**FastAPI**](https://fastapi.tiangolo.com) as the backend framework.
+- 📦 Dependency management with [**Poetry**](https://python-poetry.org).
+- 🐶 Code linting using [**Ruff**](https://github.com/astral-sh/ruff).
+- 📝 Data validation with [**Pydantic**](https://docs.pydantic.dev).
+- 🗃 [**SQLite**](https://www.sqlite.org) as the database.
+- 🆓 **ORM free** approach using raw SQL queries with the repository pattern.
+- 🛠 Database migrations with [**SQLift**](https://github.com/SpaceShaman/SQLift).
 - 🔑 **JWT** (JSON Web Token) authentication.
 - 📝 Registration with email based account activation.
 - 🔒 Secure password hashing.
-- 📫 Email based password recovery.
-- 📧 SMTP email integration for sending emails.
-- ✉️ Jinja templates for email messages.
-- ✅ Tests with [Pytest](https://pytest.org).
-- 🚢 Deployment instructions using Docker Compose.
-- 🚦 [**Traefik**](https://doc.traefik.io/traefik) as reverse proxy.
-- 🔄 **CI/CD** with GitHub Actions
-    - 🧪 Automated testing before deployment
-    - 📊 Code coverage reporting with Codecov
-    - 🚀 Continuous integration and deployment pipeline
-    - 📦 Ready-to-use workflow configurations in `.github/workflows/`
+- 📫 Password recovery via email.
+- 📧 SMTP integration for sending emails.
+- ✉️ Email templates using Jinja.
+- ✅ Unit testing with [**Pytest**](https://pytest.org).
+
+### Frontend
+
+- 🚀 [**Nuxt.js**](https://nuxt.com) as the frontend framework.
+- 🟦 [**TypeScript**](https://www.typescriptlang.org) for static type checking.
+- 🖌 Code formatting with [**Prettier**](https://prettier.io).
+- ✨ Code linting using [**ESLint**](https://eslint.org).
+- 🎨 Styling with [**TailwindCSS**](https://tailwindcss.com).
+- 🧩 Ready-to-use components from [**daisyUI**](https://daisyui.com).
+- 🔐 Middleware for authentication handling.
+- 📝 Form validation with [**VeeValidate**](https://vee-validate.logaretm.com) and [**Yup**](https://yup-docs.vercel.app/).
+- 🎨 Theme selector with 32 themes from [**daisyUI**](https://daisyui.com).
+- 🚨 Utility functions for alerts and notifications.
+    - ❌ Call `showErrorAlert('message')` to show an error message.
+    - ✅ Call `showSuccessAlert('message')` to show a success message.
+    - 💡 Call `showInfoAlert('message')` to show an info message.
+    - ⚠️ Call `showWarningAlert('message')` to show a warning message.
+
+### CI/CD
+
+- 🔄 CI/CD pipeline with GitHub Actions.
+- 🧪 Automated testing before deployment.
+- 📊 Code coverage reporting with [**Codecov**](https://about.codecov.io)
+- 🚀 Ready-to-use workflow configurations in [.github/workflows/](.github/workflows/)
+
+### Deployment
+
+- 🚢 Deployment instructions using [**Docker Compose**](https://docs.docker.com/compose).
+- 🚦 [**Traefik**](https://doc.traefik.io/traefik) as a reverse proxy.
+
+## Screenshots
 
 ### Login Page
 
@@ -127,7 +139,7 @@ docker-compose -f docker-compose.dev.yml up
 docker-compose up
 ```
 
-### CI/CD
+### CI/CD configuration
 
 This project has a CI/CD pipeline with GitHub Actions.
 You can see the workflow configuration in [.github/workflows/](.github/workflows/).
