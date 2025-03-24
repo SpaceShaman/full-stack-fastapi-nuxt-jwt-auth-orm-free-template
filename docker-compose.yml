@@ -5,6 +5,9 @@ services:
       target: prod
     container_name: backend
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=default"
       - "traefik.http.routers.backend.rule=Host(`${BASE_URL}`) && PathPrefix(`/api`)"
     env_file:
       - .env
@@ -21,6 +24,9 @@ services:
       target: prod
     container_name: frontend
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=default"
       - "traefik.http.routers.frontend.rule=Host(`${BASE_URL}`)"
     env_file:
       - .env
@@ -31,10 +37,19 @@ services:
   proxy:
     image: traefik:v3.3
     command:
-      - "--api.insecure=true"
       - "--providers.docker"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.default.acme.tlschallenge=true"
+      - "--certificatesresolvers.default.acme.email=${TLS_EMAIL}"
+      - "--certificatesresolvers.default.acme.storage=/letsencrypt/acme.json"
     ports:
-      - "80:80"
-      - "8080:8080"
+      - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - letsencrypt:/letsencrypt
+    restart: unless-stopped
+
+volumes:
+  letsencrypt:
+    
