@@ -4,13 +4,6 @@ services:
       context: backend
       target: prod
     container_name: backend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.backend.entrypoints=websecure"
-      - "traefik.http.routers.backend.tls.certresolver=default"
-      - "traefik.http.routers.backend.rule=Host(`${BASE_URL}`) && PathPrefix(`/api`)"
-      - "traefik.http.middlewares.backend-strip-prefix.stripprefix.prefixes=/api"
-      - "traefik.http.routers.backend.middlewares=backend-strip-prefix"
     env_file:
       - .env
     ports:
