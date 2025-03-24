@@ -9,7 +9,6 @@
 	const loading = ref(false)
 
 	const [password] = defineField('password')
-	const [passwordConfirmation] = defineField('passwordConfirmation')
 
 	const submit = handleSubmit(async (value) => {
 		loading.value = true
@@ -27,12 +26,6 @@
 				v-model="password"
 				:error-message="errors.password"
 				placeholder="New Password"
-				:disabled="loading"
-			/>
-			<PasswordInput
-				v-model="passwordConfirmation"
-				:error-message="errors.passwordConfirmation"
-				placeholder="Password confirmation"
 				:disabled="loading"
 			/>
 		</div>
