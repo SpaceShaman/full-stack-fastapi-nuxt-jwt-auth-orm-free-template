@@ -21,7 +21,7 @@ services:
       target: prod
     container_name: frontend
     labels:
-      - "traefik.http.routers.frontend.rule=Host(`${BASE_URL}`)"
+      - "traefik.http.routers.frontend.rule=PathPrefixStrip: /"
     env_file:
       - .env
     ports:
