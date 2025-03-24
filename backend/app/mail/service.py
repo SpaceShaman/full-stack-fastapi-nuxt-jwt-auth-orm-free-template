@@ -25,7 +25,7 @@ class MailService:
     def _create_activation_email_body(self, activation_code: str) -> str:
         with open(Path(__file__).parent / "templates/activation_email.html") as file:
             template = Template(file.read())
-        activation_url = f"{BASE_URL}/activate/{activation_code}"
+        activation_url = f"https://{BASE_URL}/activate/{activation_code}"
         return template.render(activation_url=activation_url)
 
     def send_recovery_code(self, email: str, recovery_code: str) -> None:
@@ -38,5 +38,5 @@ class MailService:
     def _create_recovery_email_body(self, recovery_code: str) -> str:
         with open(Path(__file__).parent / "templates/recovery_email.html") as file:
             template = Template(file.read())
-        recovery_url = f"{BASE_URL}/recover/{recovery_code}"
+        recovery_url = f"https://{BASE_URL}/recover/{recovery_code}"
         return template.render(recovery_url=recovery_url)
