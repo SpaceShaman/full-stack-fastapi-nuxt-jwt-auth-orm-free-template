@@ -23,7 +23,7 @@ jobs:
           key: venv-${{ hashFiles('backend/poetry.lock') }}
       - name: Install dependencies
         working-directory: ./backend
-        run: poetry install --all-extras
+        run: poetry install --all-extras --no-root
       - name: Run tests
         working-directory: ./backend
         run: poetry run pytest

@@ -9,6 +9,7 @@ jobs:
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
+    needs: tests
     steps:
       - name: Pull newest version of application and build
         uses: appleboy/ssh-action@v1
