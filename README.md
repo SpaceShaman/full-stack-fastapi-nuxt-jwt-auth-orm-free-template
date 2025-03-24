@@ -56,6 +56,7 @@
 - ✉️ Jinja templates for email messages.
 - ✅ Tests with [Pytest](https://pytest.org).
 - 🚢 Deployment instructions using Docker Compose.
+- 🚦 [**Traefik**](https://doc.traefik.io/traefik) as reverse proxy.
 - 🔄 **CI/CD** with GitHub Actions
     - 🧪 Automated testing before deployment
     - 📊 Code coverage reporting with Codecov
