@@ -17,7 +17,7 @@ services:
       target: prod
     container_name: frontend
     labels:
-      - "traefik.http.routers.frontend.rule=Host(`test.spaceshaman.me`)"
+      - "traefik.http.routers.frontend.rule=Host(`${BASE_URL}`)"
     env_file:
       - .env
     ports:
